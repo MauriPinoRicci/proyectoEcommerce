@@ -10,19 +10,19 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.cancelAppoiment = exports.postAppoiments = exports.getAppoiment = exports.getAllAppoiment = void 0;
-const getAllAppoiment = () => __awaiter(void 0, void 0, void 0, function* () {
-    yield console.log("obtener todos los turnos de todos los usuarios");
+const getAllAppoiment = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    yield res.send("obtener todos los turnos de todos los usuarios");
 });
 exports.getAllAppoiment = getAllAppoiment;
-const getAppoiment = () => __awaiter(void 0, void 0, void 0, function* () {
-    yield console.log("obtener el detalle de un turno especifico");
+const getAppoiment = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    yield res.send("obtener el detalle de un turno especifico");
 });
 exports.getAppoiment = getAppoiment;
-const postAppoiments = () => __awaiter(void 0, void 0, void 0, function* () {
-    yield console.log("agenda un nuevo turno");
+const postAppoiments = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    yield res.send("agenda un nuevo turno");
 });
 exports.postAppoiments = postAppoiments;
-const cancelAppoiment = () => __awaiter(void 0, void 0, void 0, function* () {
-    yield console.log("Cambiar el estatus de un turno a cancelled");
+const cancelAppoiment = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    yield res.send("Cambiar el estatus de un turno a cancelled");
 });
 exports.cancelAppoiment = cancelAppoiment;

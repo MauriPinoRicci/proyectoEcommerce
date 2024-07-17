@@ -10,20 +10,20 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteUser = exports.loginUser = exports.createUser = exports.getUsersById = exports.getUsers = void 0;
-const getUsers = () => __awaiter(void 0, void 0, void 0, function* () {
-    yield console.log("obtener todos los usuarios");
+const getUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    yield res.send("obtener todos los usuarios");
 });
 exports.getUsers = getUsers;
-const getUsersById = () => __awaiter(void 0, void 0, void 0, function* () {
-    yield console.log("obtener los usuarios por id");
+const getUsersById = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    yield res.send("obtener los usuarios por id");
 });
 exports.getUsersById = getUsersById;
-const createUser = () => __awaiter(void 0, void 0, void 0, function* () {
-    yield console.log("crear un nuevo usuario");
+const createUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    yield res.send("crear un nuevo usuario");
 });
 exports.createUser = createUser;
-const loginUser = () => __awaiter(void 0, void 0, void 0, function* () {
-    yield console.log("usuario logueado");
+const loginUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    yield res.send("usuario logueado");
 });
 exports.loginUser = loginUser;
 const deleteUser = () => __awaiter(void 0, void 0, void 0, function* () { });

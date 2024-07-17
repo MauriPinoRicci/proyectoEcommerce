@@ -1,18 +1,18 @@
-export const getUsers = async () => {
-  await console.log("obtener todos los usuarios");
+import { Request, Response } from 'express';
+
+
+export const getUsers = async (req: Request, res: Response) => {
+    await res.send("obtener todos los usuarios");
 };
 
-export const getUsersById = async () => {
-    await console.log("obtener los usuarios por id");
+export const getUsersById = async (req: Request, res: Response) => {
+    await res.send("obtener los usuarios por id");
+};
+export const createUser = async (req: Request, res: Response) => {
+    await res.send("crear un nuevo usuario");
+};
+export const loginUser = async (req: Request, res: Response) => {
+    await res.send("usuario logueado");
 };
 
-export const createUser = async () => {
-    await console.log("crear un nuevo usuario");
-};
-
-export const loginUser = async () => {
-    await console.log("usuario logueado");
-};
-
-
-export const deleteUser = async () => {};
+export const deleteUser = async () => { };
