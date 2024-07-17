@@ -4,16 +4,13 @@
 // PUT /shift/cancel = cancelar un turno
 
 import { Router } from "express";
-import {getAllShift} from "../controllers/AppoimentController"
-import {getShift} from "../controllers/AppoimentController"
-import {postShift} from "../controllers/AppoimentController"
-import {cancelShift} from "../controllers/AppoimentController"
+import {getAllAppoiment,getAppoiment,postAppoiments,cancelAppoiment} from "../controllers/AppoimentController"
 
 const router: Router = Router();
 
-router.get("/",getAllShift)
-router.get("/appoiment",getShift)
-router.post("/schedule",postShift)
-router.put("/cancel",cancelShift)
+router.get("/",getAllAppoiment)
+router.get("/appoiment",getAppoiment)
+router.post("/schedule",postAppoiments)
+router.put("/cancel",cancelAppoiment)
 
 export default router;
