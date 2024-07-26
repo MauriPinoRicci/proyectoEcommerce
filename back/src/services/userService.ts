@@ -1,37 +1,28 @@
+import { UserModel } from "../configs/data-source";
 import { IUserDto } from "../dtos/userDto";
-import { ICredential } from "../interfaces/ICredential";
+import { Credential } from "../entities/Crendential";
 import { IUser } from "../interfaces/IUser";
-import { creadentialMock, usersMock } from "../mocks/mock";
-import { createCredentialService } from "../services/credentialsService";
+import { usersMock } from "../mocks/mock";
+import { createCredentialService } from "./credentialsService";
 
-export const getAllUsersService = () => {
-  let result = usersMock;
-  return result;
+export const getAllUsersService = async () => {
+  const users = await UserModel.find();
+  return users;
 };
 
-export const getAllUsersByIdService = (id: number): IUser | undefined => {
-  let result = undefined;
-
-  const user = usersMock.find((user) => user.id === id);
-
-  if (user) {
-    result = user;
-  }
+export const getAllUsersByIdService = async (id: number) => {
+  let result = await UserModel.findOneBy({ id });
 
   return result;
 };
 
 export const createUserService = async (userData: IUserDto) => {
   const { username, email, birthdate, nDni, password } = userData;
+
+  const newUser = await UserModel.create({ username, email, birthdate, nDni });
   const newCredential = await createCredentialService(email, password);
-  const newUser: IUser = {
-    id: usersMock.length + 1,
-    username,
-    email,
-    birthdate,
-    nDni,
-    credentialsId: newCredential,
-  };
-  usersMock.push(newUser);
-  return newUser;
+  newUser.credential = newCredential;
+
+  const result = await UserModel.save(newUser);
+  return result;
 };

@@ -1,3 +1,4 @@
+import { CrendentialModel } from "../configs/data-source";
 import { ICredential } from "../interfaces/ICredential";
 import { creadentialMock } from "../mocks/mock";
 
@@ -5,12 +6,10 @@ export const createCredentialService = async (
   username: string,
   password: string
 ) => {
-  const newCredential: ICredential = await {
-    id: creadentialMock.length + 1,
-    username,
-    password,
-  };
-  return newCredential.id;
+  const newCredential = await CrendentialModel.create({ username, password });
+  await CrendentialModel.save(newCredential);
+  
+  return newCredential;
 };
 
 export const loginCredentialService = (username: string, password: string) => {
@@ -26,5 +25,3 @@ export const loginCredentialService = (username: string, password: string) => {
 
   return result;
 };
-
-

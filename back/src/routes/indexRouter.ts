@@ -1,6 +1,6 @@
 import {Router} from "express";
-import userRouter from "./userRouter"
 import appoimentRouter from "./AppointmentRouter"
+import userRouter from "./userRouter";
 
 const indexRouter: Router = Router();
 

@@ -1,24 +1,15 @@
+import { appointmentModel } from "../configs/data-source";
 import { IAppointmentDto } from "../dtos/appointmentDto";
 import { IAppointment } from "../interfaces/IAppointment";
 import { appointmentMock } from "../mocks/mock";
 
-export const getAllAppointmentsService = () => {
-  let result = appointmentMock;
+export const getAllAppointmentsService = async () => {
+  let result = await appointmentModel.find();
   return result;
 };
 
-export const getAllAppointmentByIdService = (
-  id: number
-): IAppointment | undefined => {
-  let result = undefined;
-
-  const appointment = appointmentMock.find(
-    (appointment) => appointment.id === id
-  );
-
-  if (appointment) {
-    result = appointment;
-  }
+export const getAllAppointmentByIdService = async (id: number) => {
+  let result = await appointmentModel.findOneBy({ id });
 
   return result;
 };
@@ -38,16 +29,15 @@ export const createAppointmentService = async (
   return newAppointment;
 };
 
-export const CancelledAppointmentService = (id: number) => {
-  let result = false;
+export const CancelledAppointmentService = async (id: number) => {
+  let result = undefined;
 
-  const index = appointmentMock.findIndex(
-    (appointment) => appointment.id === id
-  );
+  const appointment = await appointmentModel.findOneBy({ id });
 
-  if (index !== -1) {
-    appointmentMock[index].status = "cancelled";
-    result = true;
+  if (appointment !== null) {
+    appointment.status = "cancelled";
+    appointmentModel.save(appointment);
   }
-  return result;
+
+  return result ;
 };

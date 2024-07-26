@@ -1,55 +1,66 @@
-import { Request, Response } from 'express';
-import { AppointmentService } from '../services/AppointmentService';
+import { Request, Response } from "express";
+import {
+  CancelledAppointmentService,
+  createAppointmentService,
+  getAllAppointmentByIdService,
+  getAllAppointmentsService,
+} from "../services/AppointmentService";
+import { IAppointmentDto } from "../dtos/appointmentDto";
 
-class AppointmentController {
-  private appointmentService: AppointmentService;
-
-  constructor() {
-    this.appointmentService = new AppointmentService();
+export const getAppointmentsController = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const result = await getAllAppointmentsService();
+    res.status(200).send(result);
+  } catch (error) {
+    res.status(500).send(error);
   }
+};
 
-  // Obtener todos los turnos
-  getAllAppointments = (req: Request, res: Response): void => {
-    const appointments = this.appointmentService.getAllAppointments();
-    res.json(appointments);
-  }
-
-  // Obtener un turno por ID
-  getAppointmentById = (req: Request, res: Response): void => {
+export const getAppointmentsByIdController = async (
+  req: Request,
+  res: Response
+) => {
+  try {
     const { id } = req.params;
-    const appointment = this.appointmentService.getAppointmentById(id);
-    if (appointment) {
-      res.json(appointment);
-    } else {
-      res.status(404).send('Appointment not found');
-    }
+    const result = getAllAppointmentByIdService(Number(id));
+    res.status(200).send(result);
+  } catch (error) {
+    res.status(500).send(error);
   }
+};
 
-  // Crear un nuevo turno
-  createAppointment = (req: Request, res: Response): void => {
-    const { date, time, userId, status } = req.body;
-    try {
-      const appointmentId = this.appointmentService.createAppointment(date, time, userId, status);
-      res.status(201).json({ appointmentId });
-    } catch (error: any) {
-      res.status(400).send(error.message);
-    }
-  }
+export const createAppointmentController = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const { date, time, userId }: IAppointmentDto = req.body;
+    const newUser = await createAppointmentService({
+      date,
+      time,
+      userId,
+    });
+    res.status(200).send(newUser);
+  } catch (error) {}
+};
 
-  // Cancelar un turno por ID
-  cancelAppointment = (req: Request, res: Response): void => {
+export const CancelledAppointmentController = async (
+  req: Request,
+  res: Response
+) => {
+  try {
     const { id } = req.params;
-    const result = this.appointmentService.cancelAppointment(id);
-    if (result) {
-      res.status(200).send('Appointment cancelled');
-    } else {
-      res.status(404).send('Appointment not found');
-    }
-  }
-}
+    const result = CancelledAppointmentService(Number(id));
 
-const appointmentController = new AppointmentController();
-export const getAllAppointments = appointmentController.getAllAppointments;
-export const getAppointmentById = appointmentController.getAppointmentById;
-export const createAppointment = appointmentController.createAppointment;
-export const cancelAppointment = appointmentController.cancelAppointment;
+    if (await result) {
+      res.status(200).send({ message: "Appointment cancelled successfully" });
+    } else {
+      res.status(404).send({ message: "Appointment not found" });
+    }
+  } catch (error) {
+    res.status(500).send(error);
+  }
+};
