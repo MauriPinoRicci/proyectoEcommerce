@@ -1,11 +1,11 @@
 import { Router } from "express";
-import { CancelledAppointmentService, createAppointmentService, getAllAppointmentByIdService, getAllAppointmentsService } from "../services/AppointmentService";
+import { CancelledAppointmentController, createAppointmentController, getAppointmentsByIdController, getAppointmentsController } from "../controllers/AppoimentController";
 
 const appoimentRouter: Router = Router();
 
-appoimentRouter.get("/",getAllAppointmentsService)
-appoimentRouter.get("/:id",getAllAppointmentByIdService)
-appoimentRouter.post("/schedule",createAppointmentService)
-appoimentRouter.put("/cancel",CancelledAppointmentService)
+appoimentRouter.get("/", getAppointmentsController,)
+appoimentRouter.get("/:id",getAppointmentsByIdController)
+appoimentRouter.post("/schedule",createAppointmentController)
+appoimentRouter.delete("/:id/cancel",CancelledAppointmentController)
 
 export default appoimentRouter;
