@@ -12,6 +12,7 @@ export const AppDataSource = new DataSource({
     database: "henrydb",
     synchronize: true, //en true crea las tablas
     logging: false,
+   // dropSchema: true,
     entities: [User,Credential,Appointment],
     subscribers: [],
     migrations: [],

@@ -5,22 +5,20 @@ import {
   getAllAppointmentByIdService,
   getAllAppointmentsService,
 } from "../services/AppointmentService";
-import { IAppointmentDto } from "../dtos/appointmentDto";
 
 export const getAppointmentsController = async (req: Request, res: Response) => {
   try {
     const result = await getAllAppointmentsService();
-    res.status(200).json(result); // Usa json en lugar de send para respuestas JSON
+    res.status(200).json(result); 
   } catch (error: unknown) {
     if (error instanceof Error) {
-      // Si el error es una instancia de Error, responde con un mensaje de error
       res.status(500).json({ message: error.message });
     } else {
-      // Para otros tipos de errores, responde con un mensaje genérico
       res.status(500).json({ message: 'An unknown error occurred while fetching appointments' });
     }
   }
 };
+
 
 export const getAppointmentsByIdController = async (
   req: Request,
@@ -40,15 +38,13 @@ export const createAppointmentController = async (
   res: Response
 ) => {
   try {
-    const appointmentData = req.body; // Suponiendo que el cuerpo de la solicitud contiene los datos del turno
+    const appointmentData = req.body; 
     const result = await createAppointmentService(appointmentData);
-    res.status(201).send(result); // Enviar respuesta con código de estado 201 para la creación exitosa
+    res.status(201).send(result); 
   } catch (error) {
     if (error instanceof Error) {
-      // Si el error es una instancia de Error, envíalo al cliente
       res.status(500).send({ message: error.message });
     } else {
-      // Si el error no es una instancia de Error, envía un mensaje genérico
       res.status(500).send({ message: 'An unexpected error occurred' });
     }
   }

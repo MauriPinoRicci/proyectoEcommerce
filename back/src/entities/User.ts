@@ -1,13 +1,13 @@
 import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
-import { Credential } from "./Crendential";
 import { Appointment } from "./Appointment";
+import { Credential } from "./Crendential";
 
 @Entity({ name: "users" })
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ length: 100, })
+  @Column({ length: 100 })
   username: string;
 
   @Column()
@@ -19,10 +19,11 @@ export class User {
   @Column("integer")
   nDni: number;
 
-  @OneToOne(() => Credential )
+  @OneToOne(() => Credential)
   @JoinColumn()
   credential: Credential;
-  
-  
-  @OneToMany(()=>Appointment,(Appointment)=>Appointment.user) appoiments: Appointment[]
+
+  @OneToMany(() => Appointment, appointment => appointment.user)
+  appointments: Appointment[]; // Corregido: `appointments` en lugar de `appoiments`
+  password: string;
 }
