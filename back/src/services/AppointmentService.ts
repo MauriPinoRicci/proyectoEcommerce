@@ -51,11 +51,17 @@ export const getAllAppointmentsService = async () => {
 
 export const getAllAppointmentByIdService = async (id: number) => {
   try {
-    const appointment = await appointmentModel.findOneBy({ id });
+    const appointment = await appointmentModel.findOne({
+      where: { id },
+      relations: ['user'], // Incluye la relación con el usuario
+    });
 
-    // Verifica que la cita existe y formatea la fecha
     if (!appointment) {
       throw new Error(`Appointment with ID ${id} not found`);
+    }
+
+    if (!appointment.user) {
+      throw new Error(`User for appointment ID ${id} not found`);
     }
 
     // Parsear la fecha y verificar que sea válida
@@ -67,9 +73,16 @@ export const getAllAppointmentByIdService = async (id: number) => {
     // Formatear la fecha en el formato 'DD/MM/YYYY'
     return {
       id: appointment.id,
-      date: format(parsedDate, 'dd/MM/yyyy'), // Cambia el formato aquí
+      date: format(parsedDate, 'dd/MM/yyyy'),
       time: appointment.time,
-      status: appointment.status
+      status: appointment.status,
+      user: {
+        id: appointment.user.id,
+        username: appointment.user.username,
+        email: appointment.user.email,
+        birthdate: appointment.user.birthdate ? format(appointment.user.birthdate, 'dd/MM/yyyy') : null,
+        nDni: appointment.user.nDni
+      } 
     };
   } catch (error: unknown) {
     if (error instanceof Error) {

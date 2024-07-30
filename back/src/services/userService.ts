@@ -1,7 +1,6 @@
 import { CrendentialModel, UserModel } from "../configs/data-source";
 import { IUserDto } from "../dtos/userDto";
 import { createCredentialService } from "./credentialsService";
-
 import { format } from "date-fns";
 
 export const getAllUsersService = async () => {
@@ -51,7 +50,6 @@ export const createUserService = async (userData: IUserDto) => {
 };
 
 export const loginUserService = async (username: string, password: string) => {
-  // Buscar las credenciales por nombre de usuario
   const credential = await CrendentialModel.findOne({ where: { username, password } });
 
   if (credential) {
