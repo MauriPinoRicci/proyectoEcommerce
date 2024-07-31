@@ -10,6 +10,4 @@ export class Credential {
 
   @Column()
   password: string;
-
-
 }

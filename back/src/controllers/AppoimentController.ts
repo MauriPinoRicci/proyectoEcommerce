@@ -2,51 +2,52 @@ import { Request, Response } from "express";
 import {
   CancelledAppointmentService,
   createAppointmentService,
-  getAllAppointmentByIdService,
   getAllAppointmentsService,
+  getAppointmentByIdService,
 } from "../services/AppointmentService";
 
-export const getAppointmentsController = async (req: Request, res: Response) => {
+export const getAllAppointmentsController = async (req: Request, res: Response) => {
   try {
-    const result = await getAllAppointmentsService();
-    res.status(200).json(result); 
+    const appointments = await getAllAppointmentsService();
+    res.status(200).json(appointments);
   } catch (error: unknown) {
     if (error instanceof Error) {
-      res.status(500).json({ message: error.message });
+      if (error.message === 'No appointments found') {
+        res.status(400).json({ message: error.message });
+      } else {
+        res.status(500).json({ message: 'An error occurred while fetching appointments' });
+      }
     } else {
-      res.status(500).json({ message: 'An unknown error occurred while fetching appointments' });
+      res.status(500).json({ message: 'An unknown error occurred' });
     }
   }
 };
 
+export const getAppointmentsByIdController = async (req: Request, res: Response) => {
+  const { id } = req.params;
 
-export const getAppointmentsByIdController = async (
-  req: Request,
-  res: Response
-) => {
-  try {
-    const { id } = req.params;
-    const result = await getAllAppointmentByIdService(Number(id));
-    res.status(200).send(result);
-  } catch (error) {
-    res.status(500).send(error);
+  const result = await getAppointmentByIdService(Number(id));
+
+  if (result.errorCode) {
+    // Si hay un código de error, devuelve la respuesta con el código de estado adecuado
+    res.status(result.errorCode).json({ message: result.message });
+  } else {
+    // Caso exitoso
+    res.status(200).json(result);
   }
 };
 
-export const createAppointmentController = async (
-  req: Request,
-  res: Response
-) => {
-  try {
-    const appointmentData = req.body; 
-    const result = await createAppointmentService(appointmentData);
-    res.status(201).send(result); 
-  } catch (error) {
-    if (error instanceof Error) {
-      res.status(500).send({ message: error.message });
-    } else {
-      res.status(500).send({ message: 'An unexpected error occurred' });
-    }
+export const createAppointmentController = async (req: Request, res: Response) => {
+  const appointmentData = req.body;
+
+  const result = await createAppointmentService(appointmentData);
+
+  if (result.errorCode) {
+    // Si hay un código de error, devuelve la respuesta con el código de estado adecuado
+    res.status(result.errorCode).json({ message: result.message });
+  } else {
+    // Caso exitoso
+    res.status(201).json(result);
   }
 };
 

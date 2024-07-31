@@ -1,14 +1,19 @@
+import { error } from "console";
 import { appointmentModel, UserModel } from "../configs/data-source";
 import { IAppointmentDto } from "../dtos/appointmentDto";
 import { format, isValid, parse, parseISO } from 'date-fns';
-
-
 
 export const getAllAppointmentsService = async () => {
   try {
     // Recupera todas las citas de la base de datos
     const appointments = await appointmentModel.find({ relations: ['user'] });
 
+
+    if (appointments.length === 0) {
+      // No se encontraron citas
+      throw new Error('No appointments found');
+    }
+    
     // Verifica que todas las fechas sean válidas
     appointments.forEach(appointment => {
       const parsedDate = new Date(appointment.date);
@@ -45,30 +50,38 @@ export const getAllAppointmentsService = async () => {
   }
 };
 
-
-
-//AGREGAR USER ID Y VERIFICAR QUE NO HAYAN TURNOS POR UN ID QUE NO EXISTA
-
-export const getAllAppointmentByIdService = async (id: number) => {
+export const getAppointmentByIdService = async (id: number) => {
   try {
+
     const appointment = await appointmentModel.findOne({
       where: { id },
       relations: ['user'], // Incluye la relación con el usuario
     });
 
     if (!appointment) {
-      throw new Error(`Appointment with ID ${id} not found`);
+      return {
+        errorCode: 404, 
+        message: `Appointment with ID ${id} not found`
+      };
     }
 
     if (!appointment.user) {
-      throw new Error(`User for appointment ID ${id} not found`);
+      return {
+        errorCode: 404, 
+        message: `User for appointment ID ${id} not found`
+      };
     }
 
     // Parsear la fecha y verificar que sea válida
     const parsedDate = new Date(appointment.date);
     if (isNaN(parsedDate.getTime())) {
-      throw new Error(`Invalid date format for appointment ID ${id}`);
+      return {
+        errorCode: 400, 
+        message: `Invalid date format for appointment ID ${id}`
+      };
     }
+
+    console.log('Appointment found:', appointment);
 
     // Formatear la fecha en el formato 'DD/MM/YYYY'
     return {
@@ -80,20 +93,18 @@ export const getAllAppointmentByIdService = async (id: number) => {
         id: appointment.user.id,
         username: appointment.user.username,
         email: appointment.user.email,
-        birthdate: appointment.user.birthdate ? format(appointment.user.birthdate, 'dd/MM/yyyy') : null,
+        birthdate: appointment.user.birthdate ? format(new Date(appointment.user.birthdate), 'dd/MM/yyyy') : null,
         nDni: appointment.user.nDni
-      } 
+      }
     };
   } catch (error: unknown) {
-    if (error instanceof Error) {
-      console.error('Error fetching appointment:', error.message);
-    } else {
-      console.error('An unknown error occurred while fetching the appointment');
-    }
-    throw error;
+    console.error('An error occurred while fetching the appointment:', error);
+    return {
+      errorCode: 500, 
+      message: 'An unexpected error occurred while fetching the appointment'
+    };
   }
 };
-
 
 export const createAppointmentService = async (
   appointmentData: IAppointmentDto
@@ -111,41 +122,56 @@ export const createAppointmentService = async (
 
   // Verificar si la fecha es válida
   if (!isValid(parsedDate)) {
-    throw new Error('Invalid date format');
+    return {
+      errorCode: 400, // Código de error 400 para fecha inválida
+      message: 'Invalid date format'
+    };
   }
 
   // Buscar el usuario por ID
   const user = await UserModel.findOne({ where: { id: userId } });
   if (!user) {
-    throw new Error('User not found');
+    return {
+      errorCode: 400, // Código de error 400 para usuario no encontrado
+      message: 'User not found'
+    };
   }
 
   // Crear y guardar el nuevo turno
-  const newAppointment = await appointmentModel.create({ 
-    date: parsedDate, 
-    time, 
-    user, 
-    status 
-  });
-  const savedAppointment = await appointmentModel.save(newAppointment);
+  try {
+    const newAppointment = await appointmentModel.create({ 
+      date: parsedDate, 
+      time, 
+      user, 
+      status 
+    });
+    const savedAppointment = await appointmentModel.save(newAppointment);
 
-  // Formatear las fechas para la respuesta en formato 'DD/MM/YYYY'
-  const formattedDate = format(savedAppointment.date, 'dd/MM/yyyy');
-  const formattedBirthdate = user.birthdate ? format(user.birthdate, 'dd/MM/yyyy') : null;
+    // Formatear las fechas para la respuesta en formato 'DD/MM/YYYY'
+    const formattedDate = format(savedAppointment.date, 'dd/MM/yyyy');
+    const formattedBirthdate = user.birthdate ? format(user.birthdate, 'dd/MM/yyyy') : null;
 
-  return {
-    date: formattedDate,
-    time: savedAppointment.time,
-    status: savedAppointment.status,
-    user: {
-      id: user.id,
-      username: user.username,
-      email: user.email,
-      birthdate: formattedBirthdate,
-      nDni: user.nDni
-    },
-    id: savedAppointment.id
-  };
+    return {
+      date: formattedDate,
+      time: savedAppointment.time,
+      status: savedAppointment.status,
+      user: {
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        birthdate: formattedBirthdate,
+        nDni: user.nDni
+      },
+      id: savedAppointment.id
+    };
+  } catch (error) {
+    // Manejo de errores inesperados
+    console.error('Error creating appointment:', error);
+    return {
+      errorCode: 500, // Código de error 500 para errores inesperados
+      message: 'An unexpected error occurred'
+    };
+  }
 };
 
 export const CancelledAppointmentService = async (id: number) => {

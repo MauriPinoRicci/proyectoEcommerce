@@ -1,6 +1,6 @@
 import { Router } from "express";
 import {
-  getUsersController,
+  getAllUsersController,
   getUsersByIdController,
   createUserController,
   loginUserController,
@@ -9,7 +9,7 @@ import {
 
 const userRouter: Router = Router();
 
-userRouter.get("/", getUsersController);
+userRouter.get("/", getAllUsersController);
 userRouter.get("/:id", getUsersByIdController);
 userRouter.post("/register", createUserController);
 userRouter.post("/login", loginUserController);
