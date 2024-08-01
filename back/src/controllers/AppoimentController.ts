@@ -27,12 +27,9 @@ export const getAppointmentsByIdController = async (req: Request, res: Response)
   const { id } = req.params;
 
   const result = await getAppointmentByIdService(Number(id));
-
   if (result.errorCode) {
-    // Si hay un código de error, devuelve la respuesta con el código de estado adecuado
     res.status(result.errorCode).json({ message: result.message });
   } else {
-    // Caso exitoso
     res.status(200).json(result);
   }
 };
@@ -43,10 +40,8 @@ export const createAppointmentController = async (req: Request, res: Response) =
   const result = await createAppointmentService(appointmentData);
 
   if (result.errorCode) {
-    // Si hay un código de error, devuelve la respuesta con el código de estado adecuado
     res.status(result.errorCode).json({ message: result.message });
   } else {
-    // Caso exitoso
     res.status(201).json(result);
   }
 };

@@ -17,7 +17,6 @@ export const getAllUsersController = async (req: Request, res: Response) => {
       if (error.message === 'No users found') {
         res.status(400).json({ message: error.message });
       } else {
-        // Proporciona información detallada en el mensaje de error para depuración
         res.status(500).json({ message: 'An error occurred while fetching users', details: error.message });
       }
     } else {

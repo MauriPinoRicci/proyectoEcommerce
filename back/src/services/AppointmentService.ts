@@ -55,7 +55,7 @@ export const getAppointmentByIdService = async (id: number) => {
 
     const appointment = await appointmentModel.findOne({
       where: { id },
-      relations: ['user'], // Incluye la relación con el usuario
+      relations: ['user'], 
     });
 
     if (!appointment) {
@@ -83,7 +83,6 @@ export const getAppointmentByIdService = async (id: number) => {
 
     console.log('Appointment found:', appointment);
 
-    // Formatear la fecha en el formato 'DD/MM/YYYY'
     return {
       id: appointment.id,
       date: format(parsedDate, 'dd/MM/yyyy'),
@@ -110,20 +109,18 @@ export const createAppointmentService = async (
   appointmentData: IAppointmentDto
 ) => {
   const { date, time, userId } = appointmentData;
-  const status = "created"; // Inicializa el valor de status
+  const status = "created";
 
-  // Función para parsear la fecha desde el formato 'DD/MM/YYYY'
   const parseDate = (dateStr: string): Date => {
     return parse(dateStr, 'dd/MM/yyyy', new Date());
   };
 
-  // Convertir la fecha desde el formato 'DD/MM/YYYY' a un objeto Date
   const parsedDate = parseDate(date);
 
   // Verificar si la fecha es válida
   if (!isValid(parsedDate)) {
     return {
-      errorCode: 400, // Código de error 400 para fecha inválida
+      errorCode: 400, 
       message: 'Invalid date format'
     };
   }
@@ -132,7 +129,7 @@ export const createAppointmentService = async (
   const user = await UserModel.findOne({ where: { id: userId } });
   if (!user) {
     return {
-      errorCode: 400, // Código de error 400 para usuario no encontrado
+      errorCode: 400, 
       message: 'User not found'
     };
   }
@@ -168,7 +165,7 @@ export const createAppointmentService = async (
     // Manejo de errores inesperados
     console.error('Error creating appointment:', error);
     return {
-      errorCode: 500, // Código de error 500 para errores inesperados
+      errorCode: 500, 
       message: 'An unexpected error occurred'
     };
   }
