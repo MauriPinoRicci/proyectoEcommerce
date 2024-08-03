@@ -1,0 +1,89 @@
+/* reset.css */
+
+/* Reset de márgenes y padding */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+/* Elimina las listas con estilo de navegación */
+ol, ul {
+  list-style: none;
+}
+
+/* Asegura que los elementos de bloque tengan una altura mínima */
+body {
+  line-height: 1;
+}
+
+/* Elimina subrayados de enlaces */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Asegura que los formularios no tengan estilo predeterminado */
+button, input, select, textarea {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Elimina bordes y fondos de botones en los navegadores */
+button {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+/* Elimina bordes de imágenes */
+img {
+  border-style: none;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Normaliza el estilo de las tablas */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* Establece un estilo básico para elementos de formulario */
+input, textarea, button, select {
+  appearance: none;
+  border-radius: 0;
+}
+
+/* Añadir box-sizing al modelo de caja */
+html {
+  box-sizing: border-box;
+  -ms-overflow-style: scrollbar; /* IE 10+ */
+  -webkit-tap-highlight-color: transparent; /* Móvil */
+}
+
+body {
+  margin: 0;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+main, section, article, aside, nav, header, footer, figure, figcaption {
+  display: block;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-size: 100%;
+  font-weight: normal;
+}
