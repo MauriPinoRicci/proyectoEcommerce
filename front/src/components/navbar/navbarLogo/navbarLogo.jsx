@@ -1,4 +1,4 @@
-import Mlogo from '../../assets/Mlogo.jpg';
+import Mlogo from "../../../assets/Mlogo.jpg";
 import styles from '../navbarLogo/navbarLogo.module.css';
 
 const NavLogo = () => {

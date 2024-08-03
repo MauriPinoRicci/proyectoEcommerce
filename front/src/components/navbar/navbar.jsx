@@ -1,5 +1,5 @@
-import NavLogo from "../navbarLogo/navbarLogo";
-import NavLinks from "../navbarLinks/navbarLinks";
+import NavLogo from "./navbarLogo/navbarLogo";
+import NavLinks from "./navbarLinks/navbarLinks";
 import styles from './navbar.module.css';
 
 const NavBar = () => {

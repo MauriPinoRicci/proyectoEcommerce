@@ -1,11 +1,17 @@
 import NavBar from "../components/navbar/navbar";
+import Header from "../components/header/header";
+import Footer from "../components/footer/footer";
+import styles from "./Home.module.css";
 
 const Home = () => {
   return (
-    <>
-      <h1>Este es el componente Home</h1>
+    <main className={styles.main}>
+      
       <NavBar />
-    </>
+      <Header />
+      <Footer />
+
+    </main>
   );
 };
 

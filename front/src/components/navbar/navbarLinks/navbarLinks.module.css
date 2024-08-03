@@ -1,0 +1,67 @@
+html,
+body,
+#root {
+    height: 100%;
+    margin: 0;
+}
+
+.navbarContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.navbarLinks {
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.Links {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+    background-color: #c62828;
+    border-radius: 6px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.LinkSingUp {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+    background-color: #4caf50;
+    border-radius: 6px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.LinkLogin {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+    background-color: #0d47a1;
+    border-radius: 6px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.Links:hover {
+    background-color: #fafafa;
+    color: black;
+}
+
+.LinkSingUp:hover {
+    background-color: #fafafa;
+    color: black;
+}
+
+.LinkLogin:hover {
+    background-color: #fafafa;
+    color: black;
+}
