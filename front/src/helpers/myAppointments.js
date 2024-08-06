@@ -1,4 +1,4 @@
-const MyAppointments = [
+const MyAppointmentsHelper = [
   {
     id: 1,
     date: "17/08/2024",
@@ -29,4 +29,4 @@ const MyAppointments = [
   },
 ];
 
-export default MyAppointments;
+export default MyAppointmentsHelper;

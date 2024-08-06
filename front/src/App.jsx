@@ -1,20 +1,18 @@
 import "./App.css";
-import Home from "./views/Home";
-<<<<<<< Updated upstream
 import './index.css';
-// import MisTurnos from "./views/MisTurnos";
-=======
-import MisTurnos from "./views/myAppointments";
 import NavBar from "./components/navbar/navbar";
->>>>>>> Stashed changes
+import MyAppointments from "./views/appointment/myAppointments";
+import Home from "./views/home/Home";
+import Footer from "./components/footer/footer";
 
 function App() {
   return (
-    <>
+    <div className="app-container">
       <NavBar />
       <Home />
-      <MisTurnos/>
-    </>
+      <MyAppointments/>
+      <Footer />
+    </div>
   );
 }
 

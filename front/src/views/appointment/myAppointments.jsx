@@ -1,10 +1,10 @@
-import MyAppointments from "../helpers/myAppointments";
+import MyAppointmentsHelper from "../../helpers/myAppointments";
 import { useState } from "react";
-import Appointment from "../components/appointment/appointment";
+import Appointment from "../../components/appointment/appointment";
 
-const MisTurnos = () => {
-  //setTurnos esto va despues de la coma (,)
-  const [turnos, ] = useState(MyAppointments);
+const MyAppointments = () => {
+  //( setTurnos ) esto va despues de la coma (,)
+  const [turnos, ] = useState(MyAppointmentsHelper);
 
   console.log(turnos);
 
@@ -29,4 +29,4 @@ const MisTurnos = () => {
   );
 };
 
-export default MisTurnos;
+export default MyAppointments;
