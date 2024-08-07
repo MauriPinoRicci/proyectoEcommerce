@@ -1,0 +1,28 @@
+.appointment {
+  display: flex;
+  justify-content: space-around;
+  margin: 20px;
+  padding: 10px;
+  background-color: rgba(0, 0, 0, 0.5);
+  border: 1px solid black;
+  border-radius: 10px;
+  color: white;
+  font-size: 18px;
+}
+.estado {
+  color: white;
+}
+.creado {
+  color: #388e3c;
+}
+
+.cancelado {
+  color: #e53935;
+}
+
+:global(.material-icons) {
+  display: flex;
+  margin-right: 5px;
+  font-size: 24px; /* Tamaño del icono */
+  color: white; /* Color del icono */
+}

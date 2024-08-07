@@ -3,7 +3,7 @@ const MyAppointmentsHelper = [
     id: 1,
     date: "17/08/2024",
     time: "09:00",
-    status: "created",
+    status: "creado",
     userId: 1,
     user: {
       id: 1,
@@ -17,7 +17,7 @@ const MyAppointmentsHelper = [
     id: 2,
     date: "20/08/2024",
     time: "12:00",
-    status: "created",
+    status: "cancelado",
     userId: 2,
     user: {
       id: 2,

@@ -4,17 +4,16 @@ import Appointment from "../../components/appointment/appointment";
 
 const MyAppointments = () => {
   //( setTurnos ) esto va despues de la coma (,)
-  const [turnos, ] = useState(MyAppointmentsHelper);
+  const [turnos] = useState(MyAppointmentsHelper);
 
   console.log(turnos);
 
   return (
     <>
-      <h1>Mis Turnos</h1>
-      <h3>Estos son los turnos del Usuario</h3>
+      {/* <h1>Mis Turnos</h1>
+      <h3>Estos son los turnos del Usuario</h3> */}
 
       <div>
-        {" "}
         {turnos.map((turno, index) => (
           <Appointment
             key={index}

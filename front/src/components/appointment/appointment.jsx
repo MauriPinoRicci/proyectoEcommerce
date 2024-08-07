@@ -1,12 +1,22 @@
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
+import styles from "./appointment.module.css";
 
 const Appointment = ({ time, date, status, userId }) => {
   return (
-    <div>
-      <h4>Hora: {time}</h4>
-      <h4>Fecha: {date}</h4>
-      <h4>Estado: {status}</h4>
-      <h4>ID de Usuario: {userId}</h4>
+    <div className={styles.appointment}>
+      <h4 className={styles.appointment}>
+        <span className="material-icons">access_time</span> {time}
+      </h4>
+      <h4 className={styles.appointment}>
+        <span className="material-icons">calendar_month</span> {date}
+      </h4>
+      <h4 className={`${styles.appointment}`}>
+        <span className={styles.estado}>Estado: </span>
+        <span className={`${styles[status]}`}>{status}</span>
+      </h4>
+      <h4 className={styles.appointment}>
+        <span className="material-icons">person</span> ID: {userId}
+      </h4>
     </div>
   );
 };
