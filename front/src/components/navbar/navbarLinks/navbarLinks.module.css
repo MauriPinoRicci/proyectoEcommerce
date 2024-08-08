@@ -21,7 +21,7 @@ body,
 .Links {
     color: #fff;
     text-decoration: none;
-    padding: 10px 20px;
+    padding: 8px 8px;
     margin: 0 10px;
     background-color: #c62828;
     border-radius: 6px;
@@ -32,7 +32,7 @@ body,
 .LinkSingUp {
     color: #fff;
     text-decoration: none;
-    padding: 10px 20px;
+    padding: 8px 8px;
     margin: 0 10px;
     background-color: #4caf50;
     border-radius: 6px;
@@ -43,10 +43,10 @@ body,
 .LinkLogin {
     color: #fff;
     text-decoration: none;
-    padding: 10px 20px;
+    padding: 8px 8px;
     margin: 0 10px;
     background-color: #0d47a1;
-    border-radius: 6px;
+    border-radius: 10px;
     font-size: 18px;
     font-weight: 500;
 }

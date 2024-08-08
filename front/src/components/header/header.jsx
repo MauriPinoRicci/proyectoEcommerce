@@ -1,5 +1,5 @@
 import styles from "./header.module.css";
-import English from "../../assets/image.png";
+import English from "../../assets/bandera.png";
 
 const Header = () => {
     return (

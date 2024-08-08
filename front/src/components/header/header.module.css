@@ -22,7 +22,8 @@
 }
 
 .headerImg {
-    height: 500px;
-    width: 600px;
+    height: 200px;
+    width: 300px;
     margin: 20px;
+    border-radius: 10px;
 }
