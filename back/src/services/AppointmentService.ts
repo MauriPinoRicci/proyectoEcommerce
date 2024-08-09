@@ -1,20 +1,15 @@
-import { error } from "console";
 import { appointmentModel, UserModel } from "../configs/data-source";
 import { IAppointmentDto } from "../dtos/appointmentDto";
-import { format, isValid, parse, parseISO } from 'date-fns';
+import { format, isValid, parse } from 'date-fns';
 
 export const getAllAppointmentsService = async () => {
   try {
-    // Recupera todas las citas de la base de datos
     const appointments = await appointmentModel.find({ relations: ['user'] });
 
-
     if (appointments.length === 0) {
-      // No se encontraron citas
       throw new Error('No appointments found');
     }
-    
-    // Verifica que todas las fechas sean válidas
+
     appointments.forEach(appointment => {
       const parsedDate = new Date(appointment.date);
       if (isNaN(parsedDate.getTime())) {
@@ -22,13 +17,13 @@ export const getAllAppointmentsService = async () => {
       }
     });
 
-    // Formatear las fechas para la respuesta en formato 'DD/MM/YYYY'
     const result = appointments.map(appointment => ({
       id: appointment.id,
       date: format(appointment.date, 'dd/MM/yyyy'),
       time: appointment.time,
+      description: appointment.description, // Agregado description
       status: appointment.status,
-      userId: appointment.user.id, // Agregar userId a la respuesta
+      userId: appointment.user.id,
       user: {
         id: appointment.user.id,
         username: appointment.user.username,
@@ -40,7 +35,6 @@ export const getAllAppointmentsService = async () => {
 
     return result;
   } catch (error: unknown) {
-    // Manejo de errores
     if (error instanceof Error) {
       console.error('Error fetching appointments:', error.message);
     } else {
@@ -52,7 +46,6 @@ export const getAllAppointmentsService = async () => {
 
 export const getAppointmentByIdService = async (id: number) => {
   try {
-
     const appointment = await appointmentModel.findOne({
       where: { id },
       relations: ['user'], 
@@ -72,7 +65,6 @@ export const getAppointmentByIdService = async (id: number) => {
       };
     }
 
-    // Parsear la fecha y verificar que sea válida
     const parsedDate = new Date(appointment.date);
     if (isNaN(parsedDate.getTime())) {
       return {
@@ -87,6 +79,7 @@ export const getAppointmentByIdService = async (id: number) => {
       id: appointment.id,
       date: format(parsedDate, 'dd/MM/yyyy'),
       time: appointment.time,
+      description: appointment.description, // Agregado description
       status: appointment.status,
       user: {
         id: appointment.user.id,
@@ -108,7 +101,7 @@ export const getAppointmentByIdService = async (id: number) => {
 export const createAppointmentService = async (
   appointmentData: IAppointmentDto
 ) => {
-  const { date, time, userId } = appointmentData;
+  const { date, time, description, userId } = appointmentData; // Agregado description
   const status = "created";
 
   const parseDate = (dateStr: string): Date => {
@@ -117,7 +110,6 @@ export const createAppointmentService = async (
 
   const parsedDate = parseDate(date);
 
-  // Verificar si la fecha es válida
   if (!isValid(parsedDate)) {
     return {
       errorCode: 400, 
@@ -125,7 +117,6 @@ export const createAppointmentService = async (
     };
   }
 
-  // Buscar el usuario por ID
   const user = await UserModel.findOne({ where: { id: userId } });
   if (!user) {
     return {
@@ -134,23 +125,23 @@ export const createAppointmentService = async (
     };
   }
 
-  // Crear y guardar el nuevo turno
   try {
     const newAppointment = await appointmentModel.create({ 
       date: parsedDate, 
       time, 
+      description, // Agregado description
       user, 
       status 
     });
     const savedAppointment = await appointmentModel.save(newAppointment);
 
-    // Formatear las fechas para la respuesta en formato 'DD/MM/YYYY'
     const formattedDate = format(savedAppointment.date, 'dd/MM/yyyy');
     const formattedBirthdate = user.birthdate ? format(user.birthdate, 'dd/MM/yyyy') : null;
 
     return {
       date: formattedDate,
       time: savedAppointment.time,
+      description: savedAppointment.description, // Agregado description
       status: savedAppointment.status,
       user: {
         id: user.id,
@@ -162,7 +153,6 @@ export const createAppointmentService = async (
       id: savedAppointment.id
     };
   } catch (error) {
-    // Manejo de errores inesperados
     console.error('Error creating appointment:', error);
     return {
       errorCode: 500, 
@@ -172,7 +162,6 @@ export const createAppointmentService = async (
 };
 
 export const CancelledAppointmentService = async (id: number) => {
-
   const appointment = await appointmentModel.findOne({ where: { id } });
 
   if (appointment) {

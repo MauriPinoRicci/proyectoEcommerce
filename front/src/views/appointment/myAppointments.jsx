@@ -1,12 +1,15 @@
-import MyAppointmentsHelper from "../../helpers/myAppointments";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Appointment from "../../components/appointment/appointment";
+import axios from "axios";
 
 const MyAppointments = () => {
-  //( setTurnos ) esto va despues de la coma (,)
-  const [turnos] = useState(MyAppointmentsHelper);
+  const [turnos, setTurnos] = useState([]);
 
-  console.log(turnos);
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/appoiments")
+      .then((res) => setTurnos(res.data));
+  }, []);
 
   return (
     <>
@@ -19,8 +22,8 @@ const MyAppointments = () => {
             key={index}
             time={turno.time}
             date={turno.date}
+            description={turno.description}
             status={turno.status}
-            userId={turno.userId}
           />
         ))}
       </div>

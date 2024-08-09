@@ -11,6 +11,9 @@ export class Appointment {
 
   @Column()
   time: string;
+  
+  @Column()
+  description: string;
 
   @Column()
   status: string;

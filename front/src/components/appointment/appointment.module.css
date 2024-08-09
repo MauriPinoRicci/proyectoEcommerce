@@ -1,7 +1,8 @@
 .appointment {
   display: flex;
   justify-content: space-around;
-  margin: 20px;
+  align-items: center;
+  margin: 5px 20px 5px 20px;
   padding: 10px;
   background-color: rgba(0, 0, 0, 0.5);
   border: 1px solid black;
@@ -9,21 +10,21 @@
   color: white;
   font-size: 18px;
 }
+
+.iconSpacing {
+  font-size: 30px;
+  margin-right: 8px; 
+}
+
+
 .estado {
   color: white;
   margin-right: 4px;
 }
-.creado {
+.created {
   color: #388e3c;
 }
 
-.cancelado {
+.cancelled {
   color: #e53935;
-}
-
-:global(.material-icons) {
-  display: flex;
-  margin-right: 5px;
-  font-size: 24px; /* Tamaño del icono */
-  color: white; /* Color del icono */
 }

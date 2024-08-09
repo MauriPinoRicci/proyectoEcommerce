@@ -1,29 +1,20 @@
 .navLogoContainer {
   display: flex;
   align-items: center;
-  /* Centra verticalmente el contenido */
   width: auto;
-  /* Ancho automático para que se ajuste al contenido */
   height: auto;
-  /* Alto automático para que se ajuste al contenido */
   margin-right: 10px;
-  /* Espacio a la derecha del logo */
 }
 
 .navLogoContainer img {
-  width: 40px;
-  /* Ancho del logo */
-  height: 40px;
-  /* Alto del logo */
-  border-radius: 50%;
-  /* Borde redondeado */
-  object-fit: cover;
-  /* Ajusta la imagen para que cubra el área */
+  width: 50px; /* Ancho del logo */
+  height: 50px; /* Alto del logo */
+  border-radius: 50%; /* Borde redondeado */
+  object-fit: cover; /* Ajusta la imagen para que cubra el área */
 }
-
 .navLogoTitle {
   color: white;
-  font-size: 16px;
+  font-size: 20px;
   /* Tamaño de fuente del título */
   font-weight: bold;
   /* Fuente en negrita */

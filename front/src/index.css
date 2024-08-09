@@ -1,6 +1,21 @@
+/* Importar reset.css para eliminar estilos por defecto */
 @import url("./styles/reset.css");
 
-body {
-    font-family: 'Roboto Condensed', sans-serif;
-  }
-  
+/* Asegúrate de que html y body ocupen toda la altura de la ventana */
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Roboto Condensed', sans-serif; /* Fuente global */
+}
+
+/* Contenedor principal que usa Flexbox */
+.app-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Asegura que el contenedor principal ocupe al menos la altura completa de la ventana */
+}
+
+/* Contenido principal de la página */
+.content {
+    flex: 1; /* Toma todo el espacio disponible, empujando el footer hacia abajo */
+}
