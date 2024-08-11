@@ -6,13 +6,13 @@ import {Credential} from "../entities/Crendential"
 export const AppDataSource = new DataSource({
     type: "postgres",
     host: "localhost",
-    port: 5432,
+    port: 5433,
     username: "postgres",
     password: "v8aYEwjA87HQK6",
     database: "henrydb",
     synchronize: true, //en true crea las tablas
     logging: false,
-  // dropSchema: true,
+    //dropSchema: true,
     entities: [User,Credential,Appointment],
     subscribers: [],
     migrations: [],

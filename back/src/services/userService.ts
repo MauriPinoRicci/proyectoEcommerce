@@ -4,7 +4,7 @@ import {
 } from "../configs/data-source";
 import { IUserDto } from "../dtos/userDto";
 import { createCredentialService } from "./credentialsService";
-import { format } from "date-fns";
+import { format, parse } from "date-fns";
 
 export const getAllUsersService = async () => {
   try {
@@ -13,7 +13,6 @@ export const getAllUsersService = async () => {
     });
 
     if (users.length === 0) {
-      // No se encontraron usuarios
       throw new Error('No users found');
     }
 
@@ -30,7 +29,7 @@ export const getAllUsersService = async () => {
         username: user.username,
         email: user.email,
         birthdate: user.birthdate ? format(new Date(user.birthdate), "dd/MM/yyyy") : null,
-        appointments: formattedAppointments, 
+        appointments: formattedAppointments,
       };
     });
 
@@ -57,7 +56,6 @@ export const getUsersByIdService = async (id: number) => {
     throw new Error(`User with ID ${id} not found`);
   }
 
-  // Formatear las citas del usuario
   const formattedAppointments = user.appointments.map((appointment) => ({
     id: appointment.id,
     date: format(new Date(appointment.date), "dd/MM/yyyy"),
@@ -65,7 +63,6 @@ export const getUsersByIdService = async (id: number) => {
     status: appointment.status,
   }));
 
-  // Formatear la respuesta del usuario
   const formattedUser = {
     _id: user.id,
     username: user.username,
@@ -83,19 +80,25 @@ export const getUsersByIdService = async (id: number) => {
 export const createUserService = async (userData: IUserDto) => {
   const { name, email, birthdate, nDni, username, password } = userData;
 
-  const newUser = await UserModel.create({
+  const formattedBirthdate = birthdate
+    ? parse(birthdate, "dd/MM/yyyy", new Date())
+    : undefined;  
+
+  const newUser = UserModel.create({
     name,
     email,
-    birthdate,
+    birthdate: formattedBirthdate, 
     nDni,
     username,
   });
+
   const newCredential = await createCredentialService(username, password);
   newUser.credential = newCredential;
 
   const result = await UserModel.save(newUser);
   return result;
 };
+
 
 export const loginUserService = async (username: string, password: string) => {
   const credential = await CrendentialModel.findOne({
@@ -114,7 +117,7 @@ export const loginUserService = async (username: string, password: string) => {
         username: user.username,
         email: user.email,
         birthdate: user.birthdate
-          ? format(new Date(user.birthdate), "yyyy-MM-dd")
+          ? format(new Date(user.birthdate), "dd/MM/yyyy")
           : null,
         nDni: user.nDni,
       };

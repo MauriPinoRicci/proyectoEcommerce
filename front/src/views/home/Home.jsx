@@ -1,5 +1,5 @@
 import Header from "../../components/header/header";
-import styles from "./home.module.css";
+import styles from "./Home.module.css";
 
 const Home = () => {
   return (

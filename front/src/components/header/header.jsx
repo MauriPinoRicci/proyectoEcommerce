@@ -4,7 +4,7 @@ import English from "../../assets/bandera.png";
 const Header = () => {
     return (
         <header className={styles.headerContainer}>
-            <h1 className={styles.headerTitle}>Welcome My Students!</h1>
+            <h1 className={styles.headerTitle}>¡Welcome Students!</h1>
             <img className={styles.headerImg} src={English} alt="Logo" />
         </header>
     );
