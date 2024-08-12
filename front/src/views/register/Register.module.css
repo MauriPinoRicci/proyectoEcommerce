@@ -1,0 +1,99 @@
+/* Estilo para eliminar los botones de incremento/decremento en los campos de número */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.registerContainer {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.85);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 600px;
+  height: auto;
+  padding: 20px;
+  margin: 0 auto 10px auto;
+  border-radius: 12px;
+  font-size: 18px;
+  font-weight: 500;
+  border: 2px solid #76ff03;
+}
+
+.headerImg {
+  height: 230px;
+  width: 300px;
+  border-radius: 60px;
+  padding: 30px;
+}
+
+.registerTitle {
+  font-size: 30px;
+  font-weight: 700;
+  font-style: oblique;
+}
+
+.formTitle {
+  font-size: 26px;
+  font-weight: 500;
+}
+
+.inputField {
+  width: 250px;
+  height: 40px;
+  padding: 10px; /* Espaciado interno */
+  margin: 10px; /* Espacio entre el label y el input */
+  border: 2px solid #ccc; /* Borde con color gris claro */
+  border-radius: 8px; /* Bordes redondeados */
+  font-size: 18px; /* Tamaño del texto */
+  background-color: #f9f9f9; /* Color de fondo claro */
+  color: #333; /* Color del texto */
+  outline: none; /* Elimina el borde azul al hacer clic */
+}
+
+.inputField:focus {
+  border-color: red; /* Cambia el color del borde al hacer clic */
+  background-color: #fff; /* Cambia el fondo al hacer clic */
+}
+
+.buttonRegistrar {
+  background-color: white;
+  color: black;
+  font-size: 20px;
+  width: 100px;
+  height: 50px;
+  border: 2px solid #e65100;
+  border-radius: 10px;
+}
+
+.buttonRegistrar:hover {
+  font-weight: 700;
+}
+
+.message {
+  padding: 1rem;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.success {
+  color: #4caf50; /* Verde para éxito */
+  background-color: #d4edda; /* Fondo verde claro */
+}
+
+.error {
+  color: #f44336; /* Rojo para error */
+  background-color: #f8d7da; /* Fondo rojo claro */
+}
+
+.errorMessage {
+  color: #f44336; /* Rojo para mensajes de error */
+  font-size: 0.875rem;
+}

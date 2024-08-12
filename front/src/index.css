@@ -3,7 +3,7 @@
 
 /* Asegúrate de que html y body ocupen toda la altura de la ventana */
 html, body {
-    height: 100%;
+    height: auto;
     margin: 0;
     font-family: 'Roboto Condensed', sans-serif; /* Fuente global */
 }

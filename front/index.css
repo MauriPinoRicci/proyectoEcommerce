@@ -4,33 +4,40 @@ html, body {
   padding: 0;
 }
 
+html {
+  position: relative;
+}
+
 body {
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100vh;
-  background-image: url('./src/assets/image.png');
-  background-size: cover; /* Asegura que la imagen cubra todo el fondo */
-  background-position: center; /* Centra la imagen */
-  background-repeat: no-repeat; /* Evita que la imagen se repita */
+  height: 100%; /* Asegura que el body tenga la altura completa del viewport */
+  background-image: url("./src/assets/image.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: repeat;
+  position: relative;
 }
 
 body::before {
-  content: '';
-  position: absolute;
+  content: "";
+  position: fixed; /* Cambiado a fixed para cubrir todo el viewport */
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5); /* Negro con 50% de opacidad */
-  z-index: -1; /* Asegura que la capa esté detrás del contenido */
+  background: rgba(0, 0, 0, 0.5);
+  z-index: -1;
 }
+
 #root {
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100%;
-  padding: 0; 
+  min-height: 100vh;
+  padding: 0;
+  z-index: 1;
 }
 
 * {
