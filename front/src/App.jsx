@@ -12,9 +12,9 @@ function App() {
       <NavBar />
       <div className="content">
         <Home />
-        <MyAppointments />
         <Login/>
         <Register/>
+        <MyAppointments />
       </div>
       <Footer />
     </div>

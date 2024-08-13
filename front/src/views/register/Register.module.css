@@ -6,8 +6,10 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 input[type="number"] {
-  -moz-appearance: textfield;
+  -moz-appearance: textfield; 
+  appearance: textfield; 
 }
+
 
 .registerContainer {
   color: white;
@@ -36,11 +38,15 @@ input[type="number"] {
   font-size: 30px;
   font-weight: 700;
   font-style: oblique;
+  text-decoration: underline;
+  text-decoration-color: #76ff03;
+  text-decoration-thickness: 2px; 
 }
 
 .formTitle {
   font-size: 26px;
   font-weight: 500;
+  margin-right: 3px;
 }
 
 .inputField {
@@ -61,39 +67,24 @@ input[type="number"] {
   background-color: #fff; /* Cambia el fondo al hacer clic */
 }
 
-.buttonRegistrar {
-  background-color: white;
-  color: black;
-  font-size: 20px;
-  width: 100px;
-  height: 50px;
-  border: 2px solid #e65100;
-  border-radius: 10px;
+.buttonRegistrar{
+    background-color: white;
+    color: black;
+    font-size: 20px;
+    width: 100px;
+    height: 50px;
+    border: 2px solid #e65100;
+    border-radius: 10px;
 }
 
-.buttonRegistrar:hover {
-  font-weight: 700;
+
+.buttonRegistrar:hover{
+    font-weight: 700;
 }
 
-.message {
-  padding: 1rem;
-  border-radius: 4px;
-  margin-bottom: 1rem;
-  font-size: 1rem;
-  font-weight: bold;
-}
-
-.success {
-  color: #4caf50; /* Verde para éxito */
-  background-color: #d4edda; /* Fondo verde claro */
-}
-
-.error {
-  color: #f44336; /* Rojo para error */
-  background-color: #f8d7da; /* Fondo rojo claro */
-}
 
 .errorMessage {
-  color: #f44336; /* Rojo para mensajes de error */
-  font-size: 0.875rem;
+  color: red;
+  font-size: 0.875rem; /* Ajusta el tamaño de la fuente según lo necesites */
+  margin-top: 0.25rem;
 }
