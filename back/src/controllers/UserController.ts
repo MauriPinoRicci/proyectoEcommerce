@@ -72,7 +72,6 @@ export const createUserController = async (req: Request, res: Response) => {
 };
 
 export const loginUserController = async (req: Request, res: Response) => {
-  
   try {
     const { username, password } = req.body;
     const user = await loginUserService(username, password);
@@ -80,16 +79,22 @@ export const loginUserController = async (req: Request, res: Response) => {
     if (user) {
       res.status(200).json({
         login: true,
-        user,
+        message: "Login successful",
+        user, 
       });
     } else {
-      res.status(400).json({ login: false, message: "Invalid credentials" });
+      res.status(401).json({
+        login: false,
+        message: "Invalid credentials",
+      });
     }
   } catch (error) {
-    res.status(500).json({ message: "An unexpected error occurred" });
+    res.status(500).json({
+      login: false,
+      message: "An unexpected error occurred",
+    });
   }
 };
-
 export const deleteUserController = async (req: Request, res: Response) => {
   const userId = parseInt(req.params.id);
 

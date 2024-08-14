@@ -21,6 +21,7 @@ input[type="number"] {
   height: auto;
   padding: 20px;
   margin: 0 auto 10px auto;
+  margin-bottom: 30px;
   border-radius: 12px;
   font-size: 18px;
   font-weight: 500;
@@ -52,19 +53,19 @@ input[type="number"] {
 .inputField {
   width: 250px;
   height: 40px;
-  padding: 10px; /* Espaciado interno */
-  margin: 10px; /* Espacio entre el label y el input */
-  border: 2px solid #ccc; /* Borde con color gris claro */
-  border-radius: 8px; /* Bordes redondeados */
-  font-size: 18px; /* Tamaño del texto */
-  background-color: #f9f9f9; /* Color de fondo claro */
-  color: #333; /* Color del texto */
-  outline: none; /* Elimina el borde azul al hacer clic */
+  padding: 10px; 
+  margin: 10px; 
+  border: 2px solid #ccc;
+  border-radius: 8px; 
+  font-size: 18px; 
+  background-color: #f9f9f9; 
+  color: #333; 
+  outline: none;
 }
 
 .inputField:focus {
-  border-color: red; /* Cambia el color del borde al hacer clic */
-  background-color: #fff; /* Cambia el fondo al hacer clic */
+  border-color: red; 
+  background-color: #fff; 
 }
 
 .buttonRegistrar{
@@ -77,14 +78,12 @@ input[type="number"] {
     border-radius: 10px;
 }
 
-
 .buttonRegistrar:hover{
     font-weight: 700;
 }
 
-
 .errorMessage {
   color: red;
-  font-size: 0.875rem; /* Ajusta el tamaño de la fuente según lo necesites */
+  font-size: 18px; 
   margin-top: 0.25rem;
 }
