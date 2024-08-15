@@ -12,7 +12,7 @@ const NavLinks = () => {
           <Link className={styles.LinkLogin} to="/">Log in</Link>
         </li>
         <li>
-          <Link className={styles.Links} to="/services">Sobre Nosotros</Link>
+          <Link className={styles.Links} to="/appoiments">Mis Turnos</Link>
         </li>
         <li>
           <Link className={styles.Links} to="/contact">Contacto</Link>
