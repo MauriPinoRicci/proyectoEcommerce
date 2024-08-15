@@ -1,10 +1,8 @@
-import styles from "./header.module.css";
-import MyAppointments from "../../views/appointment/MyAppointments";
+import styles from "./Contact.module.css";
 
-const Header = () => {
+const Contact = () => {
   return (
-    <header className={styles.headerContainer}>
-      <h1 className={styles.headerTitle}>¡Time to Study!</h1>
+    <main className={styles.main}>
       <p className={styles.headerContent}>
         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsam
         consequuntur modi neque molestiae doloremque totam alias commodi,
@@ -24,10 +22,8 @@ const Header = () => {
         quod! Soluta.
         
       </p>
-
-      <MyAppointments />
-    </header>
+    </main>
   );
 };
 
-export default Header;
+export default Contact;

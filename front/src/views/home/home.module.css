@@ -1,0 +1,20 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.headerTitle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  margin: 10px;
+  width: 400px;
+  background-color: rgba(236, 108, 4, 0.884);
+  color: white;
+  border-radius: 20px;
+  font-size: 30px;
+  font-weight: 600;
+}

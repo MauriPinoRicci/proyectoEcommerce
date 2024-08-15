@@ -2,10 +2,13 @@ import { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { loginValidationSchema } from "../../utils/validateLogin";
 import styles from "../login/login.module.css";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
   const [message, setMessage] = useState("");
   const [messageType, setMessageType] = useState("");
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
@@ -35,6 +38,11 @@ const LoginForm = () => {
     }
   };
 
+  const handleOnSubmit = (event) => {
+    event.preventDefault();
+    navigate("/home");
+  };
+
   return (
     <div className={styles.loginFormContainer}>
       <Formik
@@ -43,7 +51,7 @@ const LoginForm = () => {
         onSubmit={handleSubmit}
       >
         {({ isSubmitting }) => (
-          <Form className={styles.loginContainer}>
+          <Form className={styles.loginContainer} onSubmit={handleOnSubmit} >
             <h1 className={styles.loginTitle}>Iniciar Sesión</h1>
             <div>
               <label htmlFor="username">Username</label>
@@ -56,7 +64,7 @@ const LoginForm = () => {
               <ErrorMessage
                 name="username"
                 component="div"
-                className={styles.errorMessage} 
+                className={styles.errorMessage}
               />
             </div>
 
