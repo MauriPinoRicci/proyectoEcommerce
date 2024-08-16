@@ -1,31 +1,14 @@
 import styles from "./header.module.css";
-import MyAppointments from "../../views/appointment/MyAppointments";
 
 const Header = () => {
   return (
     <header className={styles.headerContainer}>
-      <h1 className={styles.headerTitle}>¡Time to Study!</h1>
+      <h1 className={styles.headerTitle}>¡Welcome, Time to Study!</h1>
       <p className={styles.headerContent}>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsam
-        consequuntur modi neque molestiae doloremque totam alias commodi,
-        nostrum quo porro nisi quisquam facere dolorem dolores illo ullam, quis
-        quod! Soluta. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsam
-        consequuntur modi neque molestiae doloremque totam alias commodi,
-        nostrum quo porro nisi quisquam facere dolorem dolores illo ullam, quis
-        quod! Soluta. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsam
-        consequuntur modi neque molestiae doloremque totam alias commodi,
-        nostrum quo porro nisi quisquam facere dolorem dolores illo ullam, quis
-        quod! Soluta. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsam
-        consequuntur modi neque molestiae doloremque totam alias commodi,
-        nostrum quo porro nisi quisquam facere dolorem dolores illo ullam, quis
-        quod! Soluta. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsam
-        consequuntur modi neque molestiae doloremque totam alias commodi,
-        nostrum quo porro nisi quisquam facere dolorem dolores illo ullam, quis
-        quod! Soluta.
-        
+        Hello dear students! I hope you are studying hard and above all enjoying the learning process!
+        You are in the home page, to see the appointments in more detail, click on the -Mis Turnos- button.
+        Keep going, greetings Isa!
       </p>
-
-      <MyAppointments />
     </header>
   );
 };

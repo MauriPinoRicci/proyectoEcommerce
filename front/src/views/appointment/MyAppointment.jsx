@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Appointment from "../../components/appointment/appointment";
 import axios from "axios";
+import styles from "./MyAppointments.module.css"
 
 const MyAppointments = () => {
   const [turnos, setTurnos] = useState([]);
@@ -12,9 +13,8 @@ const MyAppointments = () => {
   }, []);
 
   return (
-    <>
-      {/* <h1>Mis Turnos</h1>
-      <h3>Estos son los turnos del Usuario</h3> */}
+    <div className={styles.headerContainer}>
+      <h1 className={styles.headerTitle}>Mis Turnos</h1>
 
       <div>
         {turnos.map((turno, index) => (
@@ -27,7 +27,7 @@ const MyAppointments = () => {
           />
         ))}
       </div>
-    </>
+    </div>
   );
 };
 

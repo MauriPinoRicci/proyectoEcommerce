@@ -47,7 +47,8 @@ input[type="number"] {
 .formTitle {
   font-size: 26px;
   font-weight: 500;
-  margin-right: 3px;
+  margin-right: 12px;
+  color: #e65100;
 }
 
 .inputField {

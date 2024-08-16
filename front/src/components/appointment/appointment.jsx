@@ -6,7 +6,7 @@ const Appointment = ({ time, date, description, status }) => {
   const statusEmoji = status === 'created' ? '✅' : status === 'cancelled' ? '❌' : '';
 
   return (
-    <div className={styles.appointment}>
+    <div className={styles.appointmentContainer}>
       <h4 className={styles.appointment}>
         <span className={`material-symbols-outlined ${styles.iconSpacing}`}>
           access_time

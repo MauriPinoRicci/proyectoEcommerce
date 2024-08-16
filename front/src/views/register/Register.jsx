@@ -37,6 +37,7 @@ const RegisterForm = () => {
             <img className={styles.headerImg} src={English} alt="Logo" />
             <h1 className={styles.registerTitle}>Registro De Usuario</h1>
             <h2 className={styles.formTitle}>Ingrese sus datos 👇</h2>
+           
             <div>
               <label htmlFor="name">Nombre:</label>
               <Field type="text" name="name" className={styles.inputField} />

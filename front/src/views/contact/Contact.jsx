@@ -4,23 +4,7 @@ const Contact = () => {
   return (
     <main className={styles.main}>
       <p className={styles.headerContent}>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsam
-        consequuntur modi neque molestiae doloremque totam alias commodi,
-        nostrum quo porro nisi quisquam facere dolorem dolores illo ullam, quis
-        quod! Soluta. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsam
-        consequuntur modi neque molestiae doloremque totam alias commodi,
-        nostrum quo porro nisi quisquam facere dolorem dolores illo ullam, quis
-        quod! Soluta. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsam
-        consequuntur modi neque molestiae doloremque totam alias commodi,
-        nostrum quo porro nisi quisquam facere dolorem dolores illo ullam, quis
-        quod! Soluta. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsam
-        consequuntur modi neque molestiae doloremque totam alias commodi,
-        nostrum quo porro nisi quisquam facere dolorem dolores illo ullam, quis
-        quod! Soluta. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsam
-        consequuntur modi neque molestiae doloremque totam alias commodi,
-        nostrum quo porro nisi quisquam facere dolorem dolores illo ullam, quis
-        quod! Soluta.
-        
+        For any questions or queries, do not hesitate to write to me, or if you prefer, we can solve the problem in the next class. Greetings isa!
       </p>
     </main>
   );

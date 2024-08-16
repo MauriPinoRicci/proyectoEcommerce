@@ -6,8 +6,10 @@ const Home = () => {
   return (
     <main className={styles.main}>
       <h1 className={styles.headerTitle}>Welcome Student</h1>
-      <Login />
-      <Register />
+      <div className={styles.authContainer}>
+        <Login />
+        <Register />
+      </div>
     </main>
   );
 };

@@ -13,8 +13,23 @@
   margin: 10px;
   width: 400px;
   background-color: rgba(236, 108, 4, 0.884);
+  border: 2px solid rgb(186, 11, 230);  
   color: white;
   border-radius: 20px;
   font-size: 30px;
   font-weight: 600;
+}
+
+.authContainer {
+  display: flex;
+  justify-content: space-between; 
+  gap: 20px; 
+  width: 80%;
+  max-width: 1200px; 
+  margin-top: 20px; 
+}
+
+.authContainer > div {
+  flex: 1; /* Asegura que los formularios se expandan uniformemente */
+  min-width: 300px; /* Establece un ancho mínimo para los formularios */
 }
