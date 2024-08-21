@@ -1,30 +1,37 @@
+// src/components/LoginForm.js
 import { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { loginValidationSchema } from "../../utils/validateLogin";
 import styles from "../login/login.module.css";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux'; 
+import { setUser } from '../../redux/reducer'; 
+import axios from 'axios'; 
 
 const LoginForm = () => {
   const [message, setMessage] = useState("");
   const [messageType, setMessageType] = useState("");
 
   const navigate = useNavigate();
+  const dispatch = useDispatch(); 
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
-      const response = await fetch("http://localhost:3000/users/login", {
-        method: "POST",
+      const response = await axios.post("http://localhost:3000/users/login", values, {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(values),
       });
 
-      const result = await response.json();
+      const result = response.data;
 
-      if (response.ok) {
+      if (response.status === 200) {
         setMessageType("success");
         setMessage(result.message);
+        // Despacha la acción para guardar el usuario en el estado global
+        dispatch(setUser(result.user));
+        // Redirige después de un login exitoso
+        navigate("/home");
       } else {
         setMessageType("error");
         setMessage(result.message);
@@ -38,11 +45,6 @@ const LoginForm = () => {
     }
   };
 
-  const handleOnSubmit = (event) => {
-    event.preventDefault();
-    navigate("/home");
-  };
-
   return (
     <div className={styles.loginFormContainer}>
       <Formik
@@ -51,7 +53,7 @@ const LoginForm = () => {
         onSubmit={handleSubmit}
       >
         {({ isSubmitting }) => (
-          <Form className={styles.loginContainer} onSubmit={handleOnSubmit} >
+          <Form className={styles.loginContainer}>
             <h1 className={styles.loginTitle}>Iniciar Sesión</h1>
             <div>
               <label htmlFor="username">Username</label>

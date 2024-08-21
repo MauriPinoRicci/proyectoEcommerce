@@ -1,9 +1,40 @@
 import PropTypes from "prop-types";
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { cancelAppointment, fetchUserAppointments } from "../../redux/reducer";
 import styles from "./appointment.module.css";
 
-const Appointment = ({ time, date, description, status }) => {
-  // Mapear el estado a su emoji correspondiente
-  const statusEmoji = status === 'created' ? '✅' : status === 'cancelled' ? '❌' : '';
+const Appointment = ({ id, time, date, description, status, user }) => {
+  const dispatch = useDispatch();
+  const loading = useSelector((state) => state.user.loading);
+  const error = useSelector((state) => state.user.error);
+  
+  // Estado local para controlar la visibilidad de la X
+  const [localStatus, setLocalStatus] = useState(status);
+
+  const statusEmoji = localStatus === 'created' ? '✅' : localStatus === 'cancelled' ? '❌' : '';
+
+  const handleCancel = async () => {
+    try {
+      const result = await dispatch(cancelAppointment(id));
+
+      if (result.success) {
+        setLocalStatus('cancelled'); // Actualiza el estado local para reflejar la cancelación
+        if (user && user.id) {
+          await dispatch(fetchUserAppointments(user.id));
+        }
+        // Mostrar mensaje de éxito
+        alert("Turno cancelado con éxito.");
+      } else {
+        console.error(result.error);
+        // Mostrar mensaje de error
+        alert(`Error al cancelar el turno: ${result.error}`);
+      }
+    } catch (error) {
+      console.error("Failed to cancel appointment:", error);
+      alert(`Error al cancelar el turno: ${error.message}`);
+    }
+  };
 
   return (
     <div className={styles.appointmentContainer}>
@@ -27,18 +58,29 @@ const Appointment = ({ time, date, description, status }) => {
       </h4>
       <h4 className={styles.appointment}>
         <span className={styles.estado}>Estado: </span>
-        <span>{statusEmoji}</span> 
+        <span>{statusEmoji}</span>
       </h4>
+      {localStatus !== 'cancelled' && (
+        <button 
+          onClick={handleCancel} 
+          className={styles.appointmentCancel}
+          disabled={loading} // Deshabilitar el botón mientras está cargando
+        >
+          {loading ? "Cancelando..." : "Cancelar Turno"}
+        </button>
+      )}
+      {error && <p className={styles.error}>Hubo un problema: {error}</p>}
     </div>
   );
-  
 };
 
 Appointment.propTypes = {
+  id: PropTypes.number.isRequired, 
   time: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired, 
   status: PropTypes.string.isRequired,
+  user: PropTypes.object.isRequired,
 };
 
 export default Appointment;

@@ -24,3 +24,19 @@
     font-size: 30px;
     font-weight: 600;
 }
+.errorTitle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    margin-top: 150px;
+    background-color: rgba(0, 0, 0, 0.85);
+    border: 2px solid rgb(250, 1, 1);
+    color: white;
+    border-radius: 20px;
+    width: auto;
+    height: auto;
+    margin-bottom: 20px;
+    font-size: 30px;
+    font-weight: 400;
+}

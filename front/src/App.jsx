@@ -1,4 +1,4 @@
-import { Routes, Route,useLocation} from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import NavBar from "./components/navbar/navbar";
 import Home from "./views/home/Home";
 import MyAppointments from "./views/appointment/MyAppointment";
@@ -9,10 +9,7 @@ import Contact from "./views/contact/Contact";
 import ErrorPage from "./views/errorpage/errorpage";
 
 function App() {
-
   const location = useLocation();
-  
-
   return (
     <div className="app-container">
       {location.pathname !== "/" && <NavBar />}

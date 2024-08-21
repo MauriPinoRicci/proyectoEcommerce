@@ -1,0 +1,63 @@
+.registerContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background-color: #fdfdfd;
+  border: 2px solid black;
+  border-radius: 30px;
+}
+
+.registerTitle {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  color:black;
+  border-bottom: 2px solid red;
+}
+
+.inputField {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+.inputField label {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: black;
+}
+
+.inputField input {
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+
+.errorMessage {
+  margin-top: 0.5rem;
+  color: red;
+  font-size: 0.875rem;
+}
+
+.buttonRegistrar {
+  padding: 0.75rem 1.5rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 1.5rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+.buttonRegistrar:hover {
+  background-color: #0056b3;
+}

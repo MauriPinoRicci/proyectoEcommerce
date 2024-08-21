@@ -1,32 +1,43 @@
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import Appointment from "../../components/appointment/appointment";
 import axios from "axios";
-import styles from "./MyAppointments.module.css"
+import styles from "./MyAppointments.module.css";
 
 const MyAppointments = () => {
   const [turnos, setTurnos] = useState([]);
+  const user = useSelector((state) => state.user.user);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:3000/appoiments")
-      .then((res) => setTurnos(res.data));
-  }, []);
+    if (user && user.id) {
+      axios
+        .get(`http://localhost:3000/appointments/user/${user.id}`)
+        .then((res) => setTurnos(res.data))
+        .catch((error) => console.error("Error fetching appointments:", error));
+    }
+  }, [user]);
 
   return (
     <div className={styles.headerContainer}>
       <h1 className={styles.headerTitle}>Mis Turnos</h1>
 
-      <div>
-        {turnos.map((turno, index) => (
-          <Appointment
-            key={index}
-            time={turno.time}
-            date={turno.date}
-            description={turno.description}
-            status={turno.status}
-          />
-        ))}
-      </div>
+      {turnos.length === 0 ? (
+        <h2 className={styles.errorTitle}>No hay turnos reservados con la profesora</h2>
+      ) : (
+        <div>
+          {turnos.map((turno, index) => (
+            <Appointment
+              key={index}
+              id={turno.id}
+              time={turno.time}
+              date={turno.date}
+              description={turno.description}
+              status={turno.status}
+              user={user} 
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
