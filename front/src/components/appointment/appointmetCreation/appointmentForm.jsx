@@ -65,7 +65,7 @@ const AppointmentForm = ({ onSubmit }) => {
           value={formik.values.description}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-          placeholder="clase de conversación"
+          placeholder="clase de conversación III"
         />
         {formik.touched.description && formik.errors.description ? (
           <div className={styles.errorMessage}>{formik.errors.description}</div>

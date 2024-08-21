@@ -13,7 +13,7 @@
   margin: 10px;
   width: 400px;
   background-color: rgba(236, 108, 4, 0.884);
-  border: 2px solid rgb(186, 11, 230);  
+  border: 2px solid rgb(186, 11, 230);
   color: white;
   border-radius: 20px;
   font-size: 30px;
@@ -22,14 +22,37 @@
 
 .authContainer {
   display: flex;
-  justify-content: space-between; 
-  gap: 20px; 
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 80%;
-  max-width: 1200px; 
-  margin-top: 20px; 
+  max-width: 1200px;
+  margin-top: 20px;
 }
 
-.authContainer > div {
-  flex: 1; /* Asegura que los formularios se expandan uniformemente */
-  min-width: 300px; /* Establece un ancho mínimo para los formularios */
+.textContainer {
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 500;
+  background-color: rgba(255, 255, 255, 0.836);
+  color: black;
+  border-radius: 20px;
+  border: 5px solid rgb(243, 188, 9);
+  padding: 10px;
+  margin: 40px;
+  height: auto;
+  width: 800px;
+}
+
+.formsContainer {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+}
+
+.formsContainer > div {
+  flex: 1; 
+  min-width: 300px;
 }

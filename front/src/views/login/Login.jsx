@@ -28,9 +28,7 @@ const LoginForm = () => {
       if (response.status === 200) {
         setMessageType("success");
         setMessage(result.message);
-        // Despacha la acción para guardar el usuario en el estado global
         dispatch(setUser(result.user));
-        // Redirige después de un login exitoso
         navigate("/home");
       } else {
         setMessageType("error");

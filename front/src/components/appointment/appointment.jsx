@@ -7,9 +7,7 @@ import styles from "./appointment.module.css";
 const Appointment = ({ id, time, date, description, status, user }) => {
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.user.loading);
-  const error = useSelector((state) => state.user.error);
   
-  // Estado local para controlar la visibilidad de la X
   const [localStatus, setLocalStatus] = useState(status);
 
   const statusEmoji = localStatus === 'created' ? '✅' : localStatus === 'cancelled' ? '❌' : '';
@@ -19,15 +17,13 @@ const Appointment = ({ id, time, date, description, status, user }) => {
       const result = await dispatch(cancelAppointment(id));
 
       if (result.success) {
-        setLocalStatus('cancelled'); // Actualiza el estado local para reflejar la cancelación
+        setLocalStatus('cancelled'); 
         if (user && user.id) {
           await dispatch(fetchUserAppointments(user.id));
         }
-        // Mostrar mensaje de éxito
         alert("Turno cancelado con éxito.");
       } else {
         console.error(result.error);
-        // Mostrar mensaje de error
         alert(`Error al cancelar el turno: ${result.error}`);
       }
     } catch (error) {
@@ -64,12 +60,11 @@ const Appointment = ({ id, time, date, description, status, user }) => {
         <button 
           onClick={handleCancel} 
           className={styles.appointmentCancel}
-          disabled={loading} // Deshabilitar el botón mientras está cargando
+          disabled={loading} 
         >
           {loading ? "Cancelando..." : "Cancelar Turno"}
         </button>
       )}
-      {error && <p className={styles.error}>Hubo un problema: {error}</p>}
     </div>
   );
 };

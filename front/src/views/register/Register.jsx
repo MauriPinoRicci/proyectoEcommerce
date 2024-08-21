@@ -4,9 +4,11 @@ import axios from "axios";
 import validationSchema from "../../utils/validateRegister";
 import styles from "./Register.module.css";
 import English from "../../assets/bandera.png";
+import { useNavigate } from "react-router-dom";
 
 const RegisterForm = () => {
   const [message, setMessage] = useState(null);
+  const navigate = useNavigate();
 
   return (
     <div>
@@ -26,6 +28,10 @@ const RegisterForm = () => {
             await axios.post("http://localhost:3000/users/register", values);
             setMessage("Registro exitoso");
             resetForm();
+            
+            setTimeout(() => {
+              navigate("/home");
+            }, 2000);
           } catch (error) {
             setMessage("Error en el registro. Inténtalo nuevamente.");
           }
@@ -37,7 +43,7 @@ const RegisterForm = () => {
             <img className={styles.headerImg} src={English} alt="Logo" />
             <h1 className={styles.registerTitle}>Registro De Usuario</h1>
             <h2 className={styles.formTitle}>Ingrese sus datos 👇</h2>
-           
+
             <div>
               <label htmlFor="name">Nombre:</label>
               <Field type="text" name="name" className={styles.inputField} />

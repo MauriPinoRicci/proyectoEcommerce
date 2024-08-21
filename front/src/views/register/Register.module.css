@@ -20,7 +20,7 @@ input[type="number"] {
   width: 600px;
   height: auto;
   padding: 20px;
-  margin: 0 auto 10px auto;
+  margin: 9px auto 10px auto;
   margin-bottom: 30px;
   border-radius: 12px;
   font-size: 18px;
@@ -87,4 +87,11 @@ input[type="number"] {
   color: red;
   font-size: 18px; 
   margin-top: 0.25rem;
+}
+
+.message {
+  color: #76ff03; /* Color verde para el mensaje de éxito */
+  font-size: 20px; /* Ajustar el tamaño del texto */
+  margin-top: 20px; /* Espaciado superior para separar del formulario */
+  text-align: center; /* Alineación centrada */
 }
