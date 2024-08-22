@@ -1,5 +1,4 @@
 import { CrendentialModel } from "../configs/data-source";
-import { ICredential } from "../interfaces/ICredential";
 import { creadentialMock } from "../mocks/mock";
 
 export const createCredentialService = async (

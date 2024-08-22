@@ -1,6 +1,12 @@
 import { appointmentModel, UserModel } from "../configs/data-source";
 import { IAppointmentDto } from "../dtos/appointmentDto";
-import { parse, format, isValid, isAfter, isBefore, isWithinInterval } from 'date-fns';
+import {
+  parse,
+  format,
+  isBefore,
+  isWithinInterval,
+  getDay,
+} from "date-fns";
 
 export const getAllAppointmentsService = async () => {
   try {
@@ -51,8 +57,8 @@ export const getAllAppointmentsService = async () => {
 export const getAppointmentsByUserIdService = async (userId: number) => {
   try {
     const appointments = await appointmentModel.find({
-      where: { user: { id: userId } }, 
-      relations: ["user"], 
+      where: { user: { id: userId } },
+      relations: ["user"],
     });
 
     if (appointments.length === 0) {
@@ -120,18 +126,29 @@ export const createAppointmentService = async (
     };
   }
 
-  // Validar que la hora esté dentro del rango permitido
-  const [hours, minutes] = time.split(':').map(Number);
+  // Validar que el turno no sea en un fin de semana
+  const dayOfWeek = getDay(parsedDate);
+  if (dayOfWeek === 0 || dayOfWeek === 6) {
+    // 0 = Domingo, 6 = Sábado
+    return {
+      errorCode: 400,
+      message: "Appointments cannot be scheduled on weekends",
+    };
+  }
+
+  const [hours, minutes] = time.split(":").map(Number);
   const appointmentTime = new Date(parsedDate);
   appointmentTime.setHours(hours, minutes);
 
   const startOfDay = new Date(parsedDate);
-  startOfDay.setHours(8, 0, 0); // 08:00 AM
+  startOfDay.setHours(8, 0, 0);
 
   const endOfDay = new Date(parsedDate);
-  endOfDay.setHours(19, 0, 0); // 07:00 PM
+  endOfDay.setHours(19, 0, 0);
 
-  if (!isWithinInterval(appointmentTime, { start: startOfDay, end: endOfDay })) {
+  if (
+    !isWithinInterval(appointmentTime, { start: startOfDay, end: endOfDay })
+  ) {
     return {
       errorCode: 400,
       message: "Appointment time must be between 08:00 and 19:00",
