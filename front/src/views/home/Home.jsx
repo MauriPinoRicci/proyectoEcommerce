@@ -11,7 +11,7 @@ const Home = () => {
           <p>
             Hello, dear students! <br />
             <br />
-            Welcome to the website of Lic. Isabel Ricci! Here, you&apos;ll have
+            Welcome to the official website of Lic. Isabel Ricci! Here, you&apos;ll have
             the opportunity to easily schedule and cancel appointments, but
             first, you&apos;ll need to create an account (this is a mandatory
             requirement). <br />

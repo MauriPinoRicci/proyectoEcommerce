@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
-import { logoutUser } from '../../redux/reducer'; // Ajusta la ruta según tu estructura de carpetas
+import { logoutUser } from '../../redux/reducer'; 
 import { useNavigate } from 'react-router-dom';
-import styles from './LogoutButton.module.css'; // Ajusta la ruta según tu estructura de carpetas
+import styles from './LogoutButton.module.css'; 
 
 const LogoutButton = () => {
   const dispatch = useDispatch();
@@ -9,7 +9,7 @@ const LogoutButton = () => {
 
   const handleLogout = () => {
     dispatch(logoutUser());
-    navigate('/'); // Redirige a la página de inicio o a donde prefieras
+    navigate('/'); 
   };
 
   return (

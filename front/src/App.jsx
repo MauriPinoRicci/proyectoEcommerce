@@ -1,4 +1,3 @@
-// App.jsx
 import { Routes, Route, useLocation } from "react-router-dom";
 import NavBar from "./components/navbar/NavBar";
 import Home from "./views/home/Home";
@@ -6,7 +5,7 @@ import MyAppointments from "./views/appointment/MyAppointment";
 import Footer from "./components/footer/Footer";
 import Header from "./components/header/header";
 import Contact from "./views/contact/Contact";
-import ErrorPage from "./views/errorpage/ErrorPage";
+import ErrorPage from "./views/errorpage/errorPage";
 import ProtectedRoute from "./components/protectedRoute/protectedRoute";
 import "./index.css";
 
@@ -22,9 +21,9 @@ function App() {
       ) : (
         <div className="content">
           <Routes>
-            <Route path="/home" element={<Header />} />
+            <Route path="/home" element={<ProtectedRoute element={<Header />} />} />
             <Route path="/appointments" element={<ProtectedRoute element={<MyAppointments />} />} />
-            <Route path="/contact" element={<Contact />} />
+            <Route path="/contact" element={<ProtectedRoute element={<Contact />} />} />
             <Route path="*" element={<ErrorPage />} />
           </Routes>
         </div>

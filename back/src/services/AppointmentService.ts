@@ -1,16 +1,17 @@
+import { time } from "console";
 import { appointmentModel, UserModel } from "../configs/data-source";
 import { IAppointmentDto } from "../dtos/appointmentDto";
-import {
-  parse,
-  format,
-  isBefore,
-  isWithinInterval,
-  getDay,
-} from "date-fns";
+import { parse, format, isBefore, isWithinInterval,subDays , getDay, startOfDay as startOfDayFn, isEqual } from 'date-fns';
 
 export const getAllAppointmentsService = async () => {
   try {
-    const appointments = await appointmentModel.find({ relations: ["user"] });
+    const appointments = await appointmentModel.find({
+      relations: ["user"],
+      order: {
+        date: "DESC",
+        time: "DESC",
+      },
+    });
 
     if (appointments.length === 0) {
       throw new Error("No appointments found");
@@ -29,7 +30,7 @@ export const getAllAppointmentsService = async () => {
       id: appointment.id,
       date: format(appointment.date, "dd/MM/yyyy"),
       time: appointment.time,
-      description: appointment.description, // Agregado description
+      description: appointment.description,
       status: appointment.status,
       userId: appointment.user.id,
       user: {
@@ -116,17 +117,21 @@ export const createAppointmentService = async (
   };
 
   const parsedDate = parseDate(date);
+  const [hours, minutes] = time.split(":").map(Number);
+  const appointmentTime = new Date(parsedDate);
+  appointmentTime.setHours(hours, minutes);
 
-  // Validar que la fecha no sea anterior a la fecha actual
-  const currentDate = new Date();
-  if (isBefore(parsedDate, currentDate)) {
+  const currentDate = startOfDayFn(new Date());
+  const currentTime = new Date();
+  currentTime.setHours(currentTime.getHours(), currentTime.getMinutes(), 0, 0);
+
+  if (isBefore(parsedDate, currentDate) || (isEqual(parsedDate, currentDate) && isBefore(appointmentTime, currentTime))) {
     return {
       errorCode: 400,
-      message: "Appointment date cannot be in the past",
+      message: "Appointment date and time cannot be in the past",
     };
   }
 
-  // Validar que el turno no sea en un fin de semana
   const dayOfWeek = getDay(parsedDate);
   if (dayOfWeek === 0 || dayOfWeek === 6) {
     // 0 = Domingo, 6 = Sábado
@@ -135,10 +140,6 @@ export const createAppointmentService = async (
       message: "Appointments cannot be scheduled on weekends",
     };
   }
-
-  const [hours, minutes] = time.split(":").map(Number);
-  const appointmentTime = new Date(parsedDate);
-  appointmentTime.setHours(hours, minutes);
 
   const startOfDay = new Date(parsedDate);
   startOfDay.setHours(8, 0, 0);
@@ -212,8 +213,21 @@ export const CancelledAppointmentService = async (id: number) => {
       };
     }
 
+    const today = new Date();
+    const appointmentDate = new Date(appointment.date);
+
+    const dayBeforeAppointment = subDays(appointmentDate, 1);
+
+    if (isBefore(dayBeforeAppointment, today)) {
+      return {
+        success: false,
+        message: "Appointments can only be cancelled up to the day before the scheduled date.",
+      };
+    }
+
     appointment.status = "cancelled";
     await appointmentModel.save(appointment);
+
     return { success: true, message: "Appointment cancelled successfully." };
   }
 

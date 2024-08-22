@@ -1,19 +1,23 @@
 .ErrorContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center; 
-    width: 500px;
-    height: auto; 
-    padding: 10px;
-    margin: 0; /* Elimina el margen */
-    font-size: 30px;
-    color: white;
-    background-color: black;
-    border-radius: 30px;
-    position: absolute; 
-    top: 50%;
-    left: 50%; 
-    transform: translate(-50%, -50%); 
-  }
-  
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  width: 600px;
+  height: 200px;
+  margin: 0;
+  font-size: 40px;
+  font-weight: 700;
+  color: white;
+  border-radius: 30px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(1, 1, 1, 0.836);
+  /* background-image: url("../../assets/disconnect.jpg");
+  background-size: cover;
+  background-position: center; 
+  background-repeat: no-repeat;  */
+}

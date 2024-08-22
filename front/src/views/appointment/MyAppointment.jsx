@@ -20,7 +20,7 @@ const MyAppointments = () => {
   return (
     <div className={styles.headerContainer}>
       <h1 className={styles.headerTitle}>Mis Turnos</h1>
-
+      <h3 className={styles.headerSubtitle}>Tené en cuenta que los turnos no podrán ser cancelados en menos de 24hrs.</h3>
       {turnos.length === 0 ? (
         <h2 className={styles.errorTitle}>No hay turnos reservados.</h2>
       ) : (

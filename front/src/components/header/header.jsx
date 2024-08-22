@@ -7,7 +7,7 @@ import { createAppointment, fetchUserAppointments } from "../../redux/reducer";
 const Header = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.user);
-  const [message, setMessage] = useState(""); // Estado para el mensaje de éxito
+  const [message, setMessage] = useState(""); 
 
   const handleCreateAppointment = async (values) => {
     if (!user || !user.id) {
@@ -24,9 +24,9 @@ const Header = () => {
 
     if (result.success) {
       dispatch(fetchUserAppointments(user.id));
-      setMessage("¡Turno creado con éxito!"); // Mensaje de éxito
+      setMessage("¡Turno creado con éxito!");
     } else {
-      setMessage("Hubo un problema al crear el turno."); // Mensaje de error
+      setMessage("Hubo un problema al crear el turno."); 
     }
   };
 

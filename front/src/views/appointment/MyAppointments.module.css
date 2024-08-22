@@ -24,6 +24,22 @@
     font-size: 30px;
     font-weight: 600;
 }
+
+.headerSubtitle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: rgba(240, 7, 7, 0.85);
+    border: 2px solid rgb(10, 233, 40);
+    color: white;
+    border-radius: 20px;
+    width: auto;
+    height: auto;
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: 200;
+}
 .errorTitle{
     display: flex;
     justify-content: center;
