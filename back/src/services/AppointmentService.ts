@@ -1,4 +1,3 @@
-import { time } from "console";
 import { appointmentModel, UserModel } from "../configs/data-source";
 import { IAppointmentDto } from "../dtos/appointmentDto";
 import { parse, format, isBefore, isWithinInterval,subDays , getDay, startOfDay as startOfDayFn, isEqual } from 'date-fns';
