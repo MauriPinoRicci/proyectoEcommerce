@@ -7,12 +7,17 @@ import styles from "./appointment.module.css";
 const Appointment = ({ id, time, date, description, status, user }) => {
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.user.loading);
-  
+
   const [localStatus, setLocalStatus] = useState(status);
 
   const statusEmoji = localStatus === 'created' ? '✅' : localStatus === 'cancelled' ? '❌' : '';
 
   const handleCancel = async () => {
+    const isConfirmed = window.confirm("¿Estás seguro de que deseas cancelar este turno?");
+    if (!isConfirmed) {
+      return; 
+    }
+
     try {
       const result = await dispatch(cancelAppointment(id));
 
@@ -21,7 +26,6 @@ const Appointment = ({ id, time, date, description, status, user }) => {
         if (user && user.id) {
           await dispatch(fetchUserAppointments(user.id));
         }
-        alert("Turno cancelado con éxito.");
       } else {
         console.error(result.error);
         alert(`Error al cancelar el turno: ${result.error}`);

@@ -22,7 +22,7 @@ const MyAppointments = () => {
       <h1 className={styles.headerTitle}>Mis Turnos</h1>
 
       {turnos.length === 0 ? (
-        <h2 className={styles.errorTitle}>No hay turnos reservados con la profesora</h2>
+        <h2 className={styles.errorTitle}>No hay turnos reservados.</h2>
       ) : (
         <div>
           {turnos.map((turno, index) => (
@@ -38,6 +38,7 @@ const MyAppointments = () => {
           ))}
         </div>
       )}
+
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { Link } from "react-router-dom";
 import styles from "./navbarLinks.module.css";
+import LogoutButton from '../../logoutComponent/logoutButton';
 
 const NavLinks = ({ showHomeLink = true, showAppointmentsLink = true, showContactLink = true }) => {
   return (
@@ -18,14 +19,17 @@ const NavLinks = ({ showHomeLink = true, showAppointmentsLink = true, showContac
         )}
         {showAppointmentsLink && (
           <li>
-            <Link className={styles.Links} to="/appoiments">Mis Turnos</Link>
+            <Link className={styles.LinksAppointment} to="/appointments">Mis Turnos</Link>
           </li>
         )}
         {showContactLink && (
           <li>
-            <Link className={styles.Links} to="/contact">Contacto</Link>
+            <Link className={styles.LinksContact} to="/contact">Contacto</Link>
           </li>
         )}
+        <li>
+          <LogoutButton /> 
+        </li>
       </ul>
     </div>
   );

@@ -51,8 +51,8 @@ export const getAllAppointmentsService = async () => {
 export const getAppointmentsByUserIdService = async (userId: number) => {
   try {
     const appointments = await appointmentModel.find({
-      where: { user: { id: userId } }, // Filtra por el ID del usuario
-      relations: ["user"], // Asegúrate de incluir la relación con el usuario
+      where: { user: { id: userId } }, 
+      relations: ["user"], 
     });
 
     if (appointments.length === 0) {
@@ -102,7 +102,7 @@ export const getAppointmentsByUserIdService = async (userId: number) => {
 export const createAppointmentService = async (
   appointmentData: IAppointmentDto
 ) => {
-  const { date, time, description, userId } = appointmentData; // Agregado description
+  const { date, time, description, userId } = appointmentData; 
   const status = "created";
 
   const parseDate = (dateStr: string): Date => {
@@ -130,7 +130,7 @@ export const createAppointmentService = async (
     const newAppointment = await appointmentModel.create({
       date: parsedDate,
       time,
-      description, // Agregado description
+      description,
       user,
       status,
     });
@@ -144,7 +144,7 @@ export const createAppointmentService = async (
     return {
       date: formattedDate,
       time: savedAppointment.time,
-      description: savedAppointment.description, // Agregado description
+      description: savedAppointment.description, 
       status: savedAppointment.status,
       user: {
         id: user.id,

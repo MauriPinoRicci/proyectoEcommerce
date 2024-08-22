@@ -17,6 +17,14 @@
   border-bottom: 2px solid red;
 }
 
+.avisoTitle{
+  font-size: 1.2rem;
+  font-weight: 500;
+  font-style: italic;
+  margin-bottom: 2rem;
+  color:black;
+  border-bottom: 2px solid rgb(10, 14, 247);
+}
 .inputField {
   display: flex;
   flex-direction: column;

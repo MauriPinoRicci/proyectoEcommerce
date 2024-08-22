@@ -25,8 +25,9 @@ const AppointmentForm = ({ onSubmit }) => {
   return (
     <form onSubmit={formik.handleSubmit} className={styles.registerContainer}>
       <h1 className={styles.registerTitle}>Registro De Turno</h1>
+      <h3 className={styles.avisoTitle}>Recorda que los horarios de atención son de 08:00 a 19:00</h3>
       <div className={styles.inputField}>
-        <label htmlFor="time">Hora</label>
+        <label htmlFor="time">Hora:</label>
         <input
           id="time"
           name="time"
@@ -42,7 +43,7 @@ const AppointmentForm = ({ onSubmit }) => {
       </div>
 
       <div className={styles.inputField}>
-        <label htmlFor="date">Fecha</label>
+        <label htmlFor="date">Fecha:</label>
         <input
           id="date"
           name="date"
@@ -50,7 +51,7 @@ const AppointmentForm = ({ onSubmit }) => {
           value={formik.values.date}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
-           placeholder="16/12/2001"
+           placeholder="16/12/2001 (formato)"
         />
         {formik.touched.date && formik.errors.date ? (
           <div className={styles.errorMessage}>{formik.errors.date}</div>
@@ -58,7 +59,7 @@ const AppointmentForm = ({ onSubmit }) => {
       </div>
 
       <div className={styles.inputField}>
-        <label htmlFor="description">Descripción</label>
+        <label htmlFor="description">Descripción del Turno:</label>
         <input
           id="description"
           name="description"

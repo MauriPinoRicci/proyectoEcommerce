@@ -4,7 +4,7 @@ import NavBar from "./components/navbar/NavBar";
 import Home from "./views/home/Home";
 import MyAppointments from "./views/appointment/MyAppointment";
 import Footer from "./components/footer/Footer";
-import Header from "./components/header/Header";
+import Header from "./components/header/header";
 import Contact from "./views/contact/Contact";
 import ErrorPage from "./views/errorpage/ErrorPage";
 import "./index.css";
@@ -22,7 +22,7 @@ function App() {
         <div className="content">
           <Routes>
             <Route path="/home" element={<Header />} />
-            <Route path="/appoiments" element={<MyAppointments />} />
+            <Route path="/appointments" element={<MyAppointments />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="*" element={<ErrorPage />} />
           </Routes>

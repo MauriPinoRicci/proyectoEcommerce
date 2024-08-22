@@ -1,4 +1,4 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import AppointmentForm from "../appointment/appointmetCreation/appointmentForm";
 import styles from "./header.module.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -39,7 +39,15 @@ const Header = () => {
         better detail, click on the -Mis Turnos- button. Keep going, greetings Isa!
       </p>
       <AppointmentForm onSubmit={handleCreateAppointment} />
-      {message && <p className={styles.message}>{message}</p>} 
+      {message && (
+        <p
+          className={`${styles.message} ${
+            message.includes("problema") ? styles.errorMessage : styles.successMessage
+          }`}
+        >
+          {message}
+        </p>
+      )}
     </header>
   );
 };
