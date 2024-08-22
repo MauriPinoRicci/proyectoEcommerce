@@ -1,6 +1,6 @@
 import { appointmentModel, UserModel } from "../configs/data-source";
 import { IAppointmentDto } from "../dtos/appointmentDto";
-import { format, isValid, parse } from "date-fns";
+import { parse, format, isValid, isAfter, isBefore, isWithinInterval } from 'date-fns';
 
 export const getAllAppointmentsService = async () => {
   try {
@@ -102,7 +102,7 @@ export const getAppointmentsByUserIdService = async (userId: number) => {
 export const createAppointmentService = async (
   appointmentData: IAppointmentDto
 ) => {
-  const { date, time, description, userId } = appointmentData; 
+  const { date, time, description, userId } = appointmentData;
   const status = "created";
 
   const parseDate = (dateStr: string): Date => {
@@ -111,10 +111,30 @@ export const createAppointmentService = async (
 
   const parsedDate = parseDate(date);
 
-  if (!isValid(parsedDate)) {
+  // Validar que la fecha no sea anterior a la fecha actual
+  const currentDate = new Date();
+  if (isBefore(parsedDate, currentDate)) {
     return {
       errorCode: 400,
-      message: "Invalid date format",
+      message: "Appointment date cannot be in the past",
+    };
+  }
+
+  // Validar que la hora esté dentro del rango permitido
+  const [hours, minutes] = time.split(':').map(Number);
+  const appointmentTime = new Date(parsedDate);
+  appointmentTime.setHours(hours, minutes);
+
+  const startOfDay = new Date(parsedDate);
+  startOfDay.setHours(8, 0, 0); // 08:00 AM
+
+  const endOfDay = new Date(parsedDate);
+  endOfDay.setHours(19, 0, 0); // 07:00 PM
+
+  if (!isWithinInterval(appointmentTime, { start: startOfDay, end: endOfDay })) {
+    return {
+      errorCode: 400,
+      message: "Appointment time must be between 08:00 and 19:00",
     };
   }
 
@@ -144,7 +164,7 @@ export const createAppointmentService = async (
     return {
       date: formattedDate,
       time: savedAppointment.time,
-      description: savedAppointment.description, 
+      description: savedAppointment.description,
       status: savedAppointment.status,
       user: {
         id: user.id,
