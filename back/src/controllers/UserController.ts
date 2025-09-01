@@ -1,12 +1,12 @@
 import { Request, Response } from "express";
-import {
-  getAllUsersService,
-  createUserService,
-  loginUserService,
-  deleteUserService,
-  getUsersByIdService,
-} from "../services/userService";
 import { validateEmail } from "../helpers/validationHelpers";
+import {
+  createUserService,
+  deleteUserService,
+  getAllUsersService,
+  getUsersByIdService,
+  loginUserService,
+} from "../services/userService";
 
 export const getAllUsersController = async (req: Request, res: Response) => {
   try {
@@ -48,26 +48,31 @@ export const createUserController = async (req: Request, res: Response) => {
   try {
     const { name, username, email, birthdate, nDni, password } = req.body;
 
-    let result = null;
-
-    if (validateEmail(email)) {
-       result = await createUserService({
-        name,
-        username,
-        email,
-        birthdate,
-        nDni,
-        password,
-      });
+    if (!name || !username || !email || !birthdate || !nDni || !password) {
+      return res.status(400).json({ message: "All fields are required" });
     }
+
+    if (!validateEmail(email)) {
+      return res.status(400).json({ message: "Invalid email format" });
+    }
+
+    const result = await createUserService({
+      name,
+      username,
+      email,
+      birthdate,
+      nDni,
+      password,
+    });
 
     if (result) {
       res.status(201).json(result);
     } else {
-      res.status(400).send("User data is incorrect");
+      res.status(400).json({ message: "User could not be created" });
     }
   } catch (error) {
-    res.status(500).send(error);
+    console.error("Error in createUserController:", error);
+    res.status(500).json({ message: "Internal server error" });
   }
 };
 
